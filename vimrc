@@ -183,11 +183,12 @@ set pastetoggle=<F2>
 set clipboard=unnamed
 
 set undofile
+set backup
 set viminfo='10,\"100,:20,%,n~/.viminfo
-set backupdir=/tmp//,.
-set directory=/tmp//,.
+set backupdir=~/.vim/tmp//,.
+set directory=~/.vim/tmp//,.
 if v:version >= 703
-  set undodir=/tmp//,.
+  set undodir=~/.vim/tmp//,.
 endif
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.bin,*.elf,*.hex,*.eps,.git/**
