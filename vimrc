@@ -204,7 +204,19 @@ function! Status()
   let statusline .= "%m"
   let statusline .= "\ [%{strlen(&ft)?&ft:'unknown'}]"
   let statusline .= "%="
-  let statusline .= "%P\ "
+  " let statusline .= "%P\ "
+  if exists('*fugitive#head')
+    let head = fugitive#head()
+
+    if empty(head) && exists('*fugitive#detect') && !exists('b:git_dir')
+      call fugitive#detect(getcwd())
+      let head = fugitive#head(5)
+    endif
+  endif
+
+  if !empty(head)
+    let statusline .=  ' on %#directory#' . head . ' '
+  endif
   return statusline
 endfunction
 set laststatus=2
@@ -225,7 +237,8 @@ map j gj
 map k gk
 
 " Remap tag-search to better place
-nmap <C-$> <C-]>
+nnoremap <C-$> <C-]>
+nnoremap <C-)> <C-w>}
 
 " Jump to end of line in insert mode
 inoremap <C-a> <C-o>I
@@ -325,6 +338,9 @@ augroup END
 
 " Resize splits after window resize
 au VimResized * exe "normal! \<c-w>="
+
+" Reload vimrc on save
+autocmd! BufWritePost .vimrc source %
 
 " Custom folding by Steve Losh
 function! MyFoldText() " {{{
