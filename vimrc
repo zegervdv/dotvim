@@ -87,7 +87,7 @@ Plug 'osyo-manga/vim-marching', { 'for': 'c' }
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 
 " Latex
-Plug 'lervag/vim-latex', { 'for': 'tex' }
+Plug 'lervag/vimtex', { 'for': 'tex' }
 
 " Git
 Plug 'tpope/vim-git'
