@@ -365,10 +365,20 @@ set foldtext=MyFoldText()
 " Latex {{{
 " Open pdf
 nnoremap <leader>v :!open -a /Applications/TeX/TeXShop.app %:r.pdf<CR><CR>
-" autocmd FileType tex setlocal makeprg=latexmk\ -pdf\ %:r
-au BufNewFile,BufRead,BufEnter *.tex setlocal spell spelllang=en_gb
-au BufNewFile,BufRead,BufEnter *.tex setlocal textwidth=0
-nnoremap <leader>ml :Dispatch latexmk -pdf %<CR>
+
+function! Latexprog()
+  if !filereadable("./Makefile")
+    setlocal makeprg=latexmk\ -pdf\ %:r
+  endif
+endfunction
+
+augroup latex
+  autocmd!
+  autocmd FileType tex call Latexprog()
+  au BufNewFile,BufRead,BufEnter *.tex setlocal spell spelllang=en_gb
+  au BufNewFile,BufRead,BufEnter *.tex setlocal textwidth=0
+  nnoremap <leader>ml :Dispatch latexmk -pdf %<CR>
+augroup END
 " }}}
 " Markdown {{{
 let g:vim_markdown_folding_disabled=1
