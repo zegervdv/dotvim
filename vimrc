@@ -86,6 +86,9 @@ Plug 'osyo-manga/vim-marching', { 'for': 'c' }
 " Coffeescript
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 
+" Jade
+Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
+
 " Latex
 Plug 'lervag/vimtex', { 'for': 'tex' }
 
