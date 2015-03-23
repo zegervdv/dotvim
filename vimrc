@@ -16,6 +16,7 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rsi'
+Plug 'tmux-plugins/vim-tmux-focus-events'
 
 " Session Management
 Plug 'tpope/vim-obsession'
@@ -102,6 +103,7 @@ set nocompatible
 " Backspace over everything, like normal 
 set backspace=2
 set autowrite
+set autoread
 
 set vb
 set guioptions-=r
@@ -343,7 +345,7 @@ augroup END
 au VimResized * exe "normal! \<c-w>="
 
 " Reload vimrc on save
-autocmd! BufWritePost .vimrc source %
+autocmd! BufWritePost $MYVIMRC source $MYVIMRC
 
 " Custom folding by Steve Losh
 function! MyFoldText() " {{{
