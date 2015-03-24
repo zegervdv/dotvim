@@ -61,6 +61,7 @@ Plug 'shougo/neosnippet-snippets'
 
 " Vim file navigation
 Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-projectionist'
 
 " Don't use arrows!
 Plug 'mrmargolis/dogmatic.vim'
@@ -80,7 +81,6 @@ Plug 'duwanis/tomdoc.vim', { 'for': 'ruby' }
 Plug 'tpope/vim-markdown', { 'for': 'markdown' }
 
 " C
-Plug 'vim-scripts/a.vim', { 'for': 'c' }
 Plug 'osyo-manga/vim-reunions', { 'for': 'c' }
 Plug 'osyo-manga/vim-marching', { 'for': 'c' }
 
@@ -476,6 +476,22 @@ endfunction
 " }}}
 " FZF {{{
 nnoremap <silent> <C-p> :call fzf#run({'tmux_height': '20%', 'sink': 'e'})<CR>
+" }}}
+" Projectionist {{{
+let g:projectionist_heuristics = {
+      \ "source/*.c&Makefile": {
+      \   "source/*.c": {
+      \   "alternate": "source/{}.h",
+      \   "type": "source",
+      \   "template": ["#include \"{}.h\""],
+      \   },
+      \   "source/*.h": {
+      \     "alternate": "source/{}.c",
+      \     "type": "header",
+      \     "template": ["#ifndef {uppercase}_H", "#define {uppercase}_H", "", "#endif"]
+      \   },
+      \ }
+      \ }
 " }}}
 
 " Load local vimrc
