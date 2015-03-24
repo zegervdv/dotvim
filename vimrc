@@ -479,18 +479,18 @@ nnoremap <silent> <C-p> :call fzf#run({'tmux_height': '20%', 'sink': 'e'})<CR>
 " }}}
 " Projectionist {{{
 let g:projectionist_heuristics = {
-      \ "source/*.c&Makefile": {
-      \   "source/*.c": {
-      \   "alternate": "source/{}.h",
+      \ "*.c": {
+      \   "*.c": {
+      \   "alternate": "{}.h",
       \   "type": "source",
       \   "template": ["#include \"{}.h\""],
       \   },
-      \   "source/*.h": {
-      \     "alternate": "source/{}.c",
+      \   "*.h": {
+      \     "alternate": "{}.c",
       \     "type": "header",
       \     "template": ["#ifndef {uppercase}_H", "#define {uppercase}_H", "", "#endif"]
       \   },
-      \ }
+      \ },
       \ }
 " }}}
 
