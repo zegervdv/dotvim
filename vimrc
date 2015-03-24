@@ -29,6 +29,7 @@ Plug 'jiangmiao/auto-pairs'
 
 " Formatting
 Plug 'junegunn/vim-easy-align'
+Plug 'AndrewRadev/splitjoin.vim'
 
 " Comments
 Plug 'tpope/vim-commentary'
@@ -97,6 +98,13 @@ Plug 'lervag/vimtex', { 'for': 'tex' }
 Plug 'tpope/vim-git'
 call plug#end()
 " }}}
+
+" Activate matchit
+if empty(glob('~/.vim/plugin/matchit.vim'))
+  silent !mkdir -p ~/.vim/plugin
+  silent !cp $VIMRUNTIME/macros/matchit.vim ~/.vim/plugin
+endif
+
 
 " General Settings and options {{{
 set nocompatible
