@@ -99,12 +99,12 @@ Plug 'tpope/vim-git'
 call plug#end()
 " }}}
 
-" Activate matchit
+" Activate matchit {{{
 if empty(glob('~/.vim/plugin/matchit.vim'))
   silent !mkdir -p ~/.vim/plugin
   silent !cp $VIMRUNTIME/macros/matchit.vim ~/.vim/plugin
 endif
-
+" }}}
 
 " General Settings and options {{{
 set nocompatible
@@ -320,8 +320,12 @@ cnoremap <c-e> <end>
 nnoremap ` '
 nnoremap ' `
 
+" Open url in browser
+nnoremap gb yiW:!open <C-r>*<CR><CR>
+
 " Open vimrc
 nnoremap <leader>ev :e $MYVIMRC<CR>
+nnoremap <leader>sv :so $MYVIMRC<CR>
 " }}}
 
 " Functions {{{
