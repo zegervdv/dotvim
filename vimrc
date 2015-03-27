@@ -108,32 +108,21 @@ endif
 
 " General Settings and options {{{
 set nocompatible
+
 " Backspace over everything, like normal 
 set backspace=2
-set autowrite
-set autoread
 
-set vb
-set guioptions-=r
-set guioptions-=l
-set guioptions-=R
-set guioptions-=L
+" Buffers
+set autowrite " Write file when exiting
+set autoread " Read external changes
+set hidden " Change between buffers without saving
 
-syntax on
-set expandtab
+" Visuals
 set number
 set ruler
-set nocursorline
-set showmatch
+syntax on
 set title
-set wrap
-set wrapmargin=2
-set linebreak
-set breakindent
-set lbr
-set tabstop=2 shiftwidth=2
-
-set magic
+set scrolloff=4 " Stay 4 lines from top/bottom
 
 " Theme and style
 set t_Co=256
@@ -141,26 +130,42 @@ set background=dark
 colorscheme Tomorrow-Night
 set guifont=Fira\ Mono:h11
 
-set hidden
-set hlsearch
-set incsearch
-set ignorecase
-set gdefault
-set smartcase
-set smartindent
-set autoindent
-set scrolloff=4
-set textwidth=80
+set showmatch " Highlight matching brackets
 
-set history=100
-set wildmenu
-set wildmode=full
-set ttyfast
-set lazyredraw
+set wrap " Wrap lines
+set wrapmargin=2 " Stay 2 chars from side
+set linebreak " Smarter wrapping
+set breakindent " Indent wrapped lines to same level
 
-set ttimeoutlen=10
-" Set the timeout to a minimum
-set diffopt+=iwhite
+set expandtab " Expand tabs to spaces
+set tabstop=2 shiftwidth=2 " Tab is 2 spaces
+
+" Searching
+set magic  " Use magic regexes
+set hlsearch " Highlight all matches
+set incsearch " Show matches while typing
+set ignorecase " Ignore case when searching
+set smartcase " Be case sensitive if at least one uppercase char is used
+set gdefault " Default substitute all matches on a line
+
+set autoindent " Automatically indent
+set smartindent " Indent wisely
+
+set vb " Don't beep
+
+set guioptions-=r
+set guioptions-=l
+set guioptions-=R
+set guioptions-=L
+
+set history=100 " Set history 100
+set wildmenu " Command completion
+set wildmode=full " Complete to fullest match
+set ttyfast " Use a fast terminal
+set lazyredraw " No need to redraw constantly
+
+set ttimeoutlen=10 " Set the timeout to a minimum
+set diffopt+=iwhite " Ignore spaces in diffs"
 
 set tags=.git/tags
 
@@ -206,8 +211,7 @@ endif
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.bin,*.elf,*.hex,*.eps,.git/**
 
-" Sentences are ended with double spaces
-set cpo+=J
+set cpo+=J " Sentences are ended with double spaces
 " }}}
 " Status line {{{
 function! Status()
