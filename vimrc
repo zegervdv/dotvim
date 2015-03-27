@@ -125,7 +125,6 @@ set title
 set scrolloff=4 " Stay 4 lines from top/bottom
 
 " Theme and style
-set t_Co=256
 set background=dark
 colorscheme Tomorrow-Night
 set guifont=Fira\ Mono:h11
@@ -151,7 +150,11 @@ set gdefault " Default substitute all matches on a line
 set autoindent " Automatically indent
 set smartindent " Indent wisely
 
+set list
+set listchars=trail:·,tab:»·,eol:¬
+
 set vb " Don't beep
+set noerrorbells " Don't beep
 
 set guioptions-=r
 set guioptions-=l
@@ -197,10 +200,11 @@ set cryptmethod=blowfish
 
 filetype plugin indent on
 
-set pastetoggle=<F2>
+set pastetoggle=<F2> " Toggle to paste mode
 set clipboard=unnamed
 
 set undofile
+set undolevels=1000
 set backup
 set viminfo='10,\"100,:20,%,n~/.viminfo
 set backupdir=~/.vim/tmp//,.
