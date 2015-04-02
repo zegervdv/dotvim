@@ -150,9 +150,6 @@ set gdefault " Default substitute all matches on a line
 set autoindent " Automatically indent
 set smartindent " Indent wisely
 
-set list
-set listchars=trail:·,tab:»·,eol:¬
-
 set vb " Don't beep
 set noerrorbells " Don't beep
 
@@ -186,6 +183,9 @@ set formatoptions+=1 " Break before 1-letter words
 set cursorline
 autocmd WinEnter * setlocal cursorline
 autocmd WinLeave * setlocal nocursorline
+
+set list
+set listchars=tab:»\ ,trail:·,extends:>,precedes:<,nbsp:+,eol:¬
 
 set sessionoptions-=options
 
@@ -345,24 +345,8 @@ autocmd BufReadPost *
       \   exe "normal g`\"" |
       \ endif
 
-" Make matching parenthesis more clear
-" This is adapted from
-" http://vim.wikia.com/wiki/Windo_and_restore_current_window
-function! KeepWin(command)
-  let currwin=winnr()
-  execute a:command
-  execute currwin . 'wincmd w'
-endfunction
-
-augroup insertMatch
-    au!
-    au VimEnter * NoMatchParen
-    au InsertEnter * call KeepWin("DoMatchParen")
-    au InsertLeave * call KeepWin("NoMatchParen")
-augroup END
-
 " Resize splits after window resize
-au VimResized * exe "normal! \<c-w>="
+au! VimResized * exe "normal! \<c-w>="
 
 " Reload vimrc on save
 autocmd! BufWritePost $MYVIMRC source $MYVIMRC
@@ -475,7 +459,7 @@ let g:neocomplete#sources#omni#input_patterns.tex =
 " Ack motions by Steve Losh, adapted for Ag
 nnoremap <silent> <Leader>a :set opfunc=<SID>AckMotion<CR>g@
 xnoremap <silent> <Leader>a :<C-U>call <SID>AckMotion(visualmode())<CR>
- 
+
 function! s:CopyMotionForType(type)
     if a:type ==# 'v'
         silent execute "normal! `<" . a:type . "`>y"
@@ -483,14 +467,14 @@ function! s:CopyMotionForType(type)
         silent execute "normal! `[v`]y"
     endif
 endfunction
- 
+
 function! s:AckMotion(type) abort
     let reg_save = @@
- 
+
     call s:CopyMotionForType(a:type)
- 
+
     execute "normal! :Ag --literal " . shellescape(@@) . "\<cr>"
- 
+
     let @@ = reg_save
 endfunction
 " }}}
