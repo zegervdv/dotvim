@@ -46,6 +46,8 @@ Plug 'tpope/vim-eunuch', { 'on' : ['Remove', 'Unlink', 'Move', 'Rename', 'Mkdir'
 
 " Syntax and checking
 Plug 'scrooloose/syntastic'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-easytags'
 
 " Undoing
 Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
@@ -454,6 +456,11 @@ if !exists('g:neocomplete#sources#omni#input_patterns')
 endif
 let g:neocomplete#sources#omni#input_patterns.tex =
       \ '\v\\\a*(ref|cite)\a*([^]]*\])?\{([^}]*,)*[^}]*'
+" }}}
+" Easytags {{{
+let g:easytags_dynamic_files = 1
+let g:easytags_events = ['BufWritePost']
+let g:easytags_async = 1
 " }}}
 " Ag {{{
 " Ack motions by Steve Losh, adapted for Ag
