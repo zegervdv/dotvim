@@ -502,6 +502,9 @@ let g:projectionist_heuristics = {
       \     "template": ["#ifndef {uppercase}_H", "#define {uppercase}_H", "", "#endif"]
       \   },
       \ },
+      \ "*.py": {
+      \   "*.py": { "make": "ipython {}" }
+      \ },
       \ }
 " }}}
 
