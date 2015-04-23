@@ -348,10 +348,10 @@ autocmd BufReadPost *
       \ endif
 
 " Resize splits after window resize
-au! VimResized * exe "normal! \<c-w>="
+au VimResized * exe "normal! \<c-w>="
 
 " Reload vimrc on save
-autocmd! BufWritePost $MYVIMRC source $MYVIMRC
+autocmd BufWritePost $MYVIMRC source $MYVIMRC
 
 " Custom folding by Steve Losh
 function! MyFoldText() " {{{
@@ -370,6 +370,26 @@ function! MyFoldText() " {{{
   return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
 endfunction " }}}
 set foldtext=MyFoldText()
+
+" Detect Filetype from content if file has no extension
+augroup newFileDetection
+autocmd CursorMovedI * call CheckFileType()
+augroup END
+
+function CheckFileType()
+  if exists("b:countCheck") == 0
+    let b:countCheck = 0
+  endif
+  let b:countCheck += 1
+  if &filetype == "" && b:countCheck > 20 && b:countCheck < 200
+    filetype detect
+    " Delete the function if no filetype can be established, or the type has
+    " been found
+  elseif b:countCheck >= 200 || &filetype != ""
+    autocmd! newFileDetection
+  endif
+endfunction
+
 " }}}
 
 " Filetype specific settings
