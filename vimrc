@@ -40,6 +40,7 @@ Plug 'rking/ag.vim'
 
 " Finding files
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+Plug 'wincent/command-t', { 'do': 'cd ruby/command-t && ruby extconf.rb && make' }
 
 " Command line
 Plug 'tpope/vim-eunuch', { 'on' : ['Remove', 'Unlink', 'Move', 'Rename', 'Mkdir', 'Chmod', 'Find', 'Locate', 'SudoEdit', 'SudoWrite']}
@@ -376,7 +377,7 @@ augroup newFileDetection
 autocmd CursorMovedI * call CheckFileType()
 augroup END
 
-function CheckFileType()
+function! CheckFileType()
   if exists("b:countCheck") == 0
     let b:countCheck = 0
   endif
@@ -506,7 +507,13 @@ function! s:AckMotion(type) abort
 endfunction
 " }}}
 " FZF {{{
-nnoremap <silent> <C-p> :call fzf#run({'tmux_height': '20%', 'sink': 'e'})<CR>
+" nnoremap <silent> <C-p> :call fzf#run({'tmux_height': '20%', 'sink': 'e'})<CR>
+" }}}
+" CommandT {{{
+let g:CommandTMaxHeight = 20
+let g:CommandTMatchWindowReverse = 1
+let g:CommandTCancelMap = ['<ESC>','<C-c>']
+
 " }}}
 " Projectionist {{{
 let g:projectionist_heuristics = {
