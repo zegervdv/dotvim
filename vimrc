@@ -16,6 +16,7 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rsi'
+Plug 'vim-scripts/gitignore'
 
 " Session Management
 Plug 'tpope/vim-obsession'
