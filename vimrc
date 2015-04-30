@@ -131,7 +131,7 @@ set scrolloff=4 " Stay 4 lines from top/bottom
 " Theme and style
 set background=dark
 colorscheme Tomorrow-Night
-set guifont=Fira\ Mono:h11
+set guifont=Inconsolata:h11
 
 set showmatch " Highlight matching brackets
 
@@ -211,10 +211,10 @@ set undofile
 set undolevels=1000
 set backup
 set viminfo='10,\"100,:20,%,n~/.viminfo
-set backupdir=~/.vim/tmp//,.
-set directory=~/.vim/tmp//,.
+set backupdir=~/.vim/tmp/backup/,.
+set directory=~/.vim/tmp/swap/,.
 if v:version >= 703
-  set undodir=~/.vim/tmp//,.
+  set undodir=~/.vim/tmp/undo/,.
 endif
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.bin,*.elf,*.hex,*.eps,.git/**
@@ -397,7 +397,8 @@ endfunction
 " Filetype specific settings
 " Latex {{{
 " Open pdf
-nnoremap <leader>v :!open -a /Applications/TeX/TeXShop.app %:r.pdf<CR><CR>
+" nnoremap <leader>v :!open -a /Applications/TeX/TeXShop.app %:r.pdf<CR><CR>
+nnoremap <silent> <leader>v :!zathura %:r.pdf > /dev/null 2>&1&<CR><CR>
 
 function! Latexprog()
   if !filereadable("./Makefile")
