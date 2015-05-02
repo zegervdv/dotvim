@@ -457,8 +457,6 @@ nnoremap <leader>u :GundoToggle<CR>
 " }}}
 " Dispatch {{{
 nnoremap <leader>s :Make<CR>
-autocmd FileType python setlocal makeprg=ipython\ --pdb\ %
-autocmd FileType ruby setlocal makeprg=ruby\ %
 " }}}
 " Neocomplete {{{
 let g:neocomplete#enable_at_startup=1
@@ -521,22 +519,25 @@ let g:CommandTCancelMap = ['<ESC>','<C-c>']
 let g:projectionist_heuristics = {
       \ "*.c": {
       \   "*.c": {
-      \   "alternate": "{}.h",
-      \   "type": "source",
-      \   "template": ["#include \"{}.h\""],
-      \   "make": "make -wC source"
+      \     "alternate": "{}.h",
+      \     "type": "source",
+      \     "template": ["#include \"{}.h\""],
+      \     "make": "make -wC {project}"
       \   },
       \   "*.h": {
       \     "alternate": "{}.c",
       \     "type": "header",
       \     "template": ["#ifndef {uppercase}_H", "#define {uppercase}_H", "", "#endif"]
       \   },
+      \   "Makefile": {"type": "makefile"},
       \ },
       \ "*.py": {
       \   "*.py": { "make": "ipython {}" }
       \ },
       \ }
 " }}}
+
+
 
 " Load local vimrc
 if filereadable($HOME . "/.vimrc.local")
