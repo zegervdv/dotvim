@@ -524,6 +524,7 @@ let g:projectionist_heuristics = {
       \   "alternate": "{}.h",
       \   "type": "source",
       \   "template": ["#include \"{}.h\""],
+      \   "make": "make -wC source"
       \   },
       \   "*.h": {
       \     "alternate": "{}.c",
