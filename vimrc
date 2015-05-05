@@ -30,7 +30,7 @@ Plug 'jiangmiao/auto-pairs'
 
 " Formatting
 Plug 'junegunn/vim-easy-align'
-Plug 'AndrewRadev/splitjoin.vim'
+" Plug 'AndrewRadev/splitjoin.vim'
 
 " Comments
 Plug 'tpope/vim-commentary'
@@ -41,7 +41,6 @@ Plug 'rking/ag.vim'
 
 " Finding files
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
-Plug 'wincent/command-t', { 'do': 'cd ruby/command-t && ruby extconf.rb && make' }
 
 " Command line
 Plug 'tpope/vim-eunuch', { 'on' : ['Remove', 'Unlink', 'Move', 'Rename', 'Mkdir', 'Chmod', 'Find', 'Locate', 'SudoEdit', 'SudoWrite']}
@@ -210,7 +209,7 @@ set clipboard=unnamed
 set undofile
 set undolevels=1000
 set backup
-set viminfo='10,\"100,:20,%,n~/.viminfo
+set viminfo+=n~/.vim/.viminfo
 set backupdir=~/.vim/tmp/backup/,.
 set directory=~/.vim/tmp/swap/,.
 if v:version >= 703
