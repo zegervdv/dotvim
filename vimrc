@@ -401,7 +401,7 @@ nnoremap <silent> <leader>v :!zathura %:r.pdf > /dev/null 2>&1&<CR><CR>
 
 function! Latexprog()
   if !filereadable("./Makefile")
-    setlocal makeprg=latexmk\ -pdf\ %:r
+    setlocal makeprg=latexmk\ -interaction=nonstopmode\ -synctex=1\ -file-line-error\ -pdf\ %:r
   endif
 endfunction
 
