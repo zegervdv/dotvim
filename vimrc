@@ -49,6 +49,7 @@ Plug 'tpope/vim-eunuch', { 'on' : ['Remove', 'Unlink', 'Move', 'Rename', 'Mkdir'
 Plug 'scrooloose/syntastic'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-easytags'
+Plug 'vim-scripts/languagetool'
 
 " Undoing
 Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
@@ -535,7 +536,9 @@ let g:projectionist_heuristics = {
       \ },
       \ }
 " }}}
-
+" Language Tool {{{
+let g:languagetool_jar='/usr/local/opt/languagetool/libexec/languagetool-commandline.jar'
+" }}}
 
 
 " Load local vimrc
