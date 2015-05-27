@@ -88,6 +88,7 @@ Plug 'tpope/vim-markdown', { 'for': 'markdown' }
 " C
 Plug 'osyo-manga/vim-reunions', { 'for': 'c' }
 Plug 'osyo-manga/vim-marching', { 'for': 'c' }
+Plug 'NLKNguyen/c-syntax.vim'
 
 " Coffeescript
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
