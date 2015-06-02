@@ -131,7 +131,7 @@ set scrolloff=4 " Stay 4 lines from top/bottom
 
 " Theme and style
 set background=dark
-colorscheme Tomorrow-Night
+colorscheme spacegray
 set guifont=Inconsolata:h11
 
 set showmatch " Highlight matching brackets
@@ -241,7 +241,7 @@ function! Status()
   endif
 
   if !empty(head)
-    let statusline .=  ' on %#directory#' . head . ' '
+    let statusline .=  ' on %#preproc#' . head . ' '
   endif
   return statusline
 endfunction
