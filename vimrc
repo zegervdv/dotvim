@@ -41,6 +41,8 @@ Plug 'rking/ag.vim'
 
 " Finding files
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'nixprime/cpsm', { 'do': './install.sh'}
 
 " Command line
 Plug 'tpope/vim-eunuch', { 'on' : ['Remove', 'Unlink', 'Move', 'Rename', 'Mkdir', 'Chmod', 'Find', 'Locate', 'SudoEdit', 'SudoWrite']}
@@ -60,9 +62,12 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tpope/vim-dispatch'
 
 " Completing and snippets
-Plug 'shougo/neocomplete.vim'
-Plug 'shougo/neosnippet.vim'
-Plug 'shougo/neosnippet-snippets'
+" Plug 'shougo/neocomplete.vim'
+" Plug 'shougo/neosnippet.vim'
+" Plug 'shougo/neosnippet-snippets'
+Plug 'valloric/youcompleteme', {'do': './install.sh --clang-completer --system-libclang'}
+Plug 'sirver/ultisnips'
+Plug 'honza/vim-snippets'
 
 " Vim file navigation
 Plug 'tpope/vim-vinegar'
@@ -196,6 +201,7 @@ set sessionoptions-=options
 
 " Scan files for completion
 set complete=.,w,b,u,k,kspell,t,i,d
+set completeopt=menuone
 
 set splitright
 set virtualedit=block
@@ -220,7 +226,6 @@ endif
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.bin,*.elf,*.hex,*.eps,.git/**
 
-set cpo+=J " Sentences are ended with double spaces
 " }}}
 " Status line {{{
 function! Status()
@@ -459,26 +464,6 @@ nnoremap <leader>u :GundoToggle<CR>
 " Dispatch {{{
 nnoremap <leader>s :Make<CR>
 " }}}
-" Neocomplete {{{
-let g:neocomplete#enable_at_startup=1
-" let g:neocomplete#data_directory=s:get_cache_dir('neocomplete')
-" }}}
-" Neosnippet {{{
-let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets,~/.vim/snippets'
-let g:neosnippet#enable_snipmate_compatibility=1
-
-imap <expr><TAB> neosnippet#expandable() == 1 ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-imap <expr><C-k> neosnippet#expandable_or_jumpable() == 1 ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable() == 1 ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-let g:neocomplete#sources#omni#input_patterns.tex =
-      \ '\v\\\a*(ref|cite)\a*([^]]*\])?\{([^}]*,)*[^}]*'
-" }}}
 " Easytags {{{
 let g:easytags_dynamic_files = 1
 let g:easytags_events = ['BufWritePost']
@@ -539,6 +524,19 @@ let g:projectionist_heuristics = {
 " }}}
 " Language Tool {{{
 let g:languagetool_jar='/usr/local/opt/languagetool/libexec/languagetool-commandline.jar'
+" }}}
+" YouCompleteMe {{{
+let g:ycm_global_ycm_extra_conf = "~/.vim/ycm_extra_conf.py"
+let g:ycm_show_diagnostics_ui = 0
+let g:ycm_autoclose_preview_window_after_completion = 1
+" }}}
+" UltiSnips {{{
+let g:UltiSnipsExpandTrigger = "<c-j>"
+let g:UltiSnipsJumpForwardTrigger = "<c-k>"
+let g:UltiSnipsJumpBackwardTrigger = "<c-z>"
+" }}}
+" CtrlP {{{
+let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
 " }}}
 
 
