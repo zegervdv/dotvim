@@ -136,7 +136,7 @@ set scrolloff=4 " Stay 4 lines from top/bottom
 
 " Theme and style
 set background=dark
-colorscheme spacegray
+colorscheme Tomorrow-Night
 set guifont=Inconsolata:h11
 
 set showmatch " Highlight matching brackets
