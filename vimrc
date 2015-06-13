@@ -536,7 +536,7 @@ let g:UltiSnipsJumpForwardTrigger = "<c-k>"
 let g:UltiSnipsJumpBackwardTrigger = "<c-z>"
 " }}}
 " CtrlP {{{
-let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
+" let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
 " }}}
 
 
