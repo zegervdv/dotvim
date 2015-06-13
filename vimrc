@@ -536,7 +536,11 @@ let g:UltiSnipsJumpForwardTrigger = "<c-k>"
 let g:UltiSnipsJumpBackwardTrigger = "<c-z>"
 " }}}
 " CtrlP {{{
-" let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
+if executable('ag')
+  set grepprg=ag\ --nogroup\ --nocolor
+  let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --ignore ''.git'' --ignore ''.DS_Store'' -ignore ''node_modules'' --hidden -g ""'
+endif
+let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
 " }}}
 
 
