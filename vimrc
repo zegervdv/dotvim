@@ -17,6 +17,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rsi'
 Plug 'vim-scripts/gitignore'
+Plug 'einfachtoll/didyoumean'
 
 " Session Management
 Plug 'tpope/vim-obsession'
@@ -38,6 +39,8 @@ Plug 'tpope/vim-commentary'
 " Moving in files
 Plug 'wellle/targets.vim'
 Plug 'rking/ag.vim'
+" Plug 'ervandew/ag'
+" Plug 'gabesoft/vim-ags'
 
 " Finding files
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
@@ -51,7 +54,6 @@ Plug 'tpope/vim-eunuch', { 'on' : ['Remove', 'Unlink', 'Move', 'Rename', 'Mkdir'
 Plug 'scrooloose/syntastic'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-easytags'
-Plug 'vim-scripts/languagetool'
 
 " Undoing
 Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
@@ -86,6 +88,7 @@ Plug 'tpope/vim-bundler', { 'for': 'ruby' }
 Plug 'tpope/vim-rake', { 'for': 'ruby' }
 Plug 'slim-template/vim-slim', { 'for': 'ruby' }
 Plug 'duwanis/tomdoc.vim', { 'for': 'ruby' }
+Plug 'keith/rspec.vim', { 'for': 'rspec' }
 
 " Markdown
 Plug 'tpope/vim-markdown', { 'for': 'markdown' }
