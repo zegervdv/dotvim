@@ -153,14 +153,14 @@ set scrolloff=4 " Stay 4 lines from top/bottom
 " Theme and style
 if has("unix")
   let s:uname = system("uname -s")
-  if has("gui")
-    set background=light
-    colorscheme PaperColor
-  endif
   if s:uname == "Darwin\n"
     set background=dark
     colorscheme tomorrow-night
-    set guifont=inconsolata:h11
+    set guifont=inconsolata:h12
+  endif
+  if has("gui_running")
+    set background=light
+    colorscheme PaperColor
   endif
 endif
 
