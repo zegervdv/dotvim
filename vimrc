@@ -39,13 +39,16 @@ Plug 'tpope/vim-commentary'
 " Moving in files
 Plug 'wellle/targets.vim'
 Plug 'rking/ag.vim'
+Plug 'unblevable/quick-scope'
 " Plug 'ervandew/ag'
 " Plug 'gabesoft/vim-ags'
 
 " Finding files
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'nixprime/cpsm', { 'do': './install.sh'}
+if version > 7.3
+  Plug 'nixprime/cpsm', { 'do': './install.sh'}
+end
 
 " Command line
 Plug 'tpope/vim-eunuch', { 'on' : ['Remove', 'Unlink', 'Move', 'Rename', 'Mkdir', 'Chmod', 'Find', 'Locate', 'SudoEdit', 'SudoWrite']}
@@ -67,45 +70,55 @@ Plug 'tpope/vim-dispatch'
 " Plug 'shougo/neocomplete.vim'
 " Plug 'shougo/neosnippet.vim'
 " Plug 'shougo/neosnippet-snippets'
-Plug 'valloric/youcompleteme', {'do': './install.sh --clang-completer --system-libclang'}
-Plug 'sirver/ultisnips'
-Plug 'honza/vim-snippets'
+if has("unix")
+  let s:uname = system("uname -s")
+  if s:uname == "Darwin\n"
+    Plug 'valloric/youcompleteme', {'do': './install.sh --clang-completer --system-libclang'}
+  endif
+endif
+if version > 7.3
+  Plug 'sirver/ultisnips'
+  Plug 'honza/vim-snippets'
+endif
 
 " Vim file navigation
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-projectionist'
 
-" Don't use arrows!
-Plug 'mrmargolis/dogmatic.vim'
-
 " Theme
 Plug 'w0ng/vim-hybrid'
+Plug 'NLKNguyen/papercolor-theme'
 
-" Ruby
-Plug 'tpope/vim-rails', { 'for': 'ruby' }
-Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
-Plug 'tpope/vim-bundler', { 'for': 'ruby' }
-Plug 'tpope/vim-rake', { 'for': 'ruby' }
-Plug 'slim-template/vim-slim', { 'for': 'ruby' }
-Plug 'duwanis/tomdoc.vim', { 'for': 'ruby' }
-Plug 'keith/rspec.vim', { 'for': 'rspec' }
+if has("unix")
+  let s:uname = system("uname -s")
+  if s:uname == "Darwin\n"
+    " Ruby
+    Plug 'tpope/vim-rails', { 'for': 'ruby' }
+    Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
+    Plug 'tpope/vim-bundler', { 'for': 'ruby' }
+    Plug 'tpope/vim-rake', { 'for': 'ruby' }
+    Plug 'slim-template/vim-slim', { 'for': 'ruby' }
+    Plug 'duwanis/tomdoc.vim', { 'for': 'ruby' }
+    Plug 'keith/rspec.vim', { 'for': 'rspec' }
 
-" Markdown
-Plug 'tpope/vim-markdown', { 'for': 'markdown' }
+    " Markdown
+    Plug 'tpope/vim-markdown', { 'for': 'markdown' }
 
-" C
-Plug 'osyo-manga/vim-reunions', { 'for': 'c' }
-Plug 'osyo-manga/vim-marching', { 'for': 'c' }
-Plug 'NLKNguyen/c-syntax.vim'
+    " C
+    Plug 'osyo-manga/vim-reunions', { 'for': 'c' }
+    Plug 'osyo-manga/vim-marching', { 'for': 'c' }
+    Plug 'NLKNguyen/c-syntax.vim'
 
-" Coffeescript
-Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
+    " Coffeescript
+    Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 
-" Jade
-Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
+    " Jade
+    Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
 
-" Latex
-Plug 'lervag/vimtex', { 'for': 'tex' }
+    " Latex
+    Plug 'lervag/vimtex', { 'for': 'tex' }
+  endif
+endif
 
 " Git
 Plug 'tpope/vim-git'
@@ -138,16 +151,27 @@ set title
 set scrolloff=4 " Stay 4 lines from top/bottom
 
 " Theme and style
-set background=dark
-colorscheme Tomorrow-Night
-set guifont=Inconsolata:h11
+if has("unix")
+  let s:uname = system("uname -s")
+  if has("gui")
+    set background=light
+    colorscheme PaperColor
+  endif
+  if s:uname == "Darwin\n"
+    set background=dark
+    colorscheme tomorrow-night
+    set guifont=inconsolata:h11
+  endif
+endif
 
 set showmatch " Highlight matching brackets
 
 set wrap " Wrap lines
 set wrapmargin=2 " Stay 2 chars from side
 set linebreak " Smarter wrapping
-set breakindent " Indent wrapped lines to same level
+if version > 7.3
+  set breakindent " Indent wrapped lines to same level
+endif
 
 set expandtab " Expand tabs to spaces
 set tabstop=2 shiftwidth=2 " Tab is 2 spaces
@@ -208,16 +232,21 @@ set completeopt=menuone
 
 set splitright
 set virtualedit=block
-set conceallevel=0
 
-set cryptmethod=blowfish
+if version > 7.3
+  set conceallevel=0
+
+  set cryptmethod=blowfish
+endif
 
 filetype plugin indent on
 
 set pastetoggle=<F2> " Toggle to paste mode
 set clipboard=unnamed
 
-set undofile
+if version > 7.3
+  set undofile
+endif
 set undolevels=1000
 set backup
 set viminfo+=n~/.vim/.viminfo
