@@ -197,6 +197,9 @@ set gdefault " Default substitute all matches on a line
 set autoindent " Automatically indent
 set smartindent " Indent wisely
 
+if s:darwin
+  set vb
+endif
 set noerrorbells " Don't beep
 
 set guioptions-=r
@@ -583,6 +586,34 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --ignore ".git" --ignore ".DS_Store" --ignore "node_modules" --hidden -g ""'
 endif
 let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
+" }}}
+" QuickScope {{{
+" Insert into your .vimrc after quick-scope is loaded.
+" Obviously depends on <https://github.com/unblevable/quick-scope> being installed.
+
+" Thanks to @VanLaser for cleaning the code up and expanding capabilities to include e.g. `df`
+
+let g:qs_enable = 0
+let g:qs_enable_char_list = [ 'f', 'F', 't', 'T' ]
+
+function! Quick_scope_selective(movement)
+    let needs_disabling = 0
+    if !g:qs_enable
+        QuickScopeToggle
+        redraw
+        let needs_disabling = 1
+    endif
+    let letter = nr2char(getchar())
+    if needs_disabling
+        QuickScopeToggle
+    endif
+    return a:movement . letter
+endfunction
+
+for i in g:qs_enable_char_list
+  execute 'noremap <expr> <silent>' . i . " Quick_scope_selective('". i . "')"
+endfor
+"    
 " }}}
 
 
