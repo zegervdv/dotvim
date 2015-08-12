@@ -1,5 +1,7 @@
 " vim:fdm=marker
 
+let s:darwin = has('mac')
+
 " Include Vim-Plug {{{
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !mkdir -p ~/.vim/autoload
@@ -19,11 +21,13 @@ Plug 'tpope/vim-rsi'
 Plug 'vim-scripts/gitignore'
 Plug 'einfachtoll/didyoumean'
 
-" Session Management
-Plug 'tpope/vim-obsession'
+if s:darwin
+  " Session Management
+  Plug 'tpope/vim-obsession'
 
-" Spelling
-Plug 'tpope/vim-abolish'
+  " Spelling
+  Plug 'tpope/vim-abolish'
+endif
 
 " Brackets
 Plug 'tpope/vim-surround'
@@ -38,23 +42,27 @@ Plug 'tpope/vim-commentary'
 
 " Moving in files
 Plug 'wellle/targets.vim'
-Plug 'rking/ag.vim'
 Plug 'unblevable/quick-scope'
 " Plug 'ervandew/ag'
 " Plug 'gabesoft/vim-ags'
+if s:darwin
+  Plug 'rking/ag.vim'
+endif
 
 " Finding files
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
-Plug 'ctrlpvim/ctrlp.vim'
-if version > 7.3
+if s:darwin
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+  Plug 'ctrlpvim/ctrlp.vim'
   Plug 'nixprime/cpsm', { 'do': './install.sh'}
-end
+endif
 
 " Command line
 Plug 'tpope/vim-eunuch', { 'on' : ['Remove', 'Unlink', 'Move', 'Rename', 'Mkdir', 'Chmod', 'Find', 'Locate', 'SudoEdit', 'SudoWrite']}
 
 " Syntax and checking
-Plug 'scrooloose/syntastic'
+if s:darwin
+  Plug 'scrooloose/syntastic'
+endif
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-easytags'
 
@@ -62,21 +70,20 @@ Plug 'xolox/vim-easytags'
 Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
 
 " Tmux
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'tmux-plugins/vim-tmux-focus-events'
-Plug 'tpope/vim-dispatch'
+if s:darwin
+  Plug 'christoomey/vim-tmux-navigator'
+  Plug 'tmux-plugins/vim-tmux-focus-events'
+  Plug 'tpope/vim-dispatch'
+endif
 
 " Completing and snippets
 " Plug 'shougo/neocomplete.vim'
 " Plug 'shougo/neosnippet.vim'
 " Plug 'shougo/neosnippet-snippets'
-if has("unix")
-  let s:uname = system("uname -s")
-  if s:uname == "Darwin\n"
-    Plug 'valloric/youcompleteme', {'do': './install.sh --clang-completer --system-libclang'}
-  endif
+if s:darwin
+  Plug 'valloric/youcompleteme', {'do': './install.sh --clang-completer --system-libclang'}
 endif
-if version > 7.3
+if v:version > 703
   Plug 'sirver/ultisnips'
   Plug 'honza/vim-snippets'
 endif
@@ -89,35 +96,32 @@ Plug 'tpope/vim-projectionist'
 Plug 'w0ng/vim-hybrid'
 Plug 'NLKNguyen/papercolor-theme'
 
-if has("unix")
-  let s:uname = system("uname -s")
-  if s:uname == "Darwin\n"
-    " Ruby
-    Plug 'tpope/vim-rails', { 'for': 'ruby' }
-    Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
-    Plug 'tpope/vim-bundler', { 'for': 'ruby' }
-    Plug 'tpope/vim-rake', { 'for': 'ruby' }
-    Plug 'slim-template/vim-slim', { 'for': 'ruby' }
-    Plug 'duwanis/tomdoc.vim', { 'for': 'ruby' }
-    Plug 'keith/rspec.vim', { 'for': 'rspec' }
+if s:darwin
+  " Ruby
+  Plug 'tpope/vim-rails', { 'for': 'ruby' }
+  Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
+  Plug 'tpope/vim-bundler', { 'for': 'ruby' }
+  Plug 'tpope/vim-rake', { 'for': 'ruby' }
+  Plug 'slim-template/vim-slim', { 'for': 'ruby' }
+  Plug 'duwanis/tomdoc.vim', { 'for': 'ruby' }
+  Plug 'keith/rspec.vim', { 'for': 'rspec' }
 
-    " Markdown
-    Plug 'tpope/vim-markdown', { 'for': 'markdown' }
+  " Markdown
+  Plug 'tpope/vim-markdown', { 'for': 'markdown' }
 
-    " C
-    Plug 'osyo-manga/vim-reunions', { 'for': 'c' }
-    Plug 'osyo-manga/vim-marching', { 'for': 'c' }
-    Plug 'NLKNguyen/c-syntax.vim'
+  " C
+  Plug 'osyo-manga/vim-reunions', { 'for': 'c' }
+  Plug 'osyo-manga/vim-marching', { 'for': 'c' }
+  Plug 'NLKNguyen/c-syntax.vim'
 
-    " Coffeescript
-    Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
+  " Coffeescript
+  Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 
-    " Jade
-    Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
+  " Jade
+  Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
 
-    " Latex
-    Plug 'lervag/vimtex', { 'for': 'tex' }
-  endif
+  " Latex
+  Plug 'lervag/vimtex', { 'for': 'tex' }
 endif
 
 " Git
@@ -151,17 +155,14 @@ set title
 set scrolloff=4 " Stay 4 lines from top/bottom
 
 " Theme and style
-if has("unix")
-  let s:uname = system("uname -s")
-  if s:uname == "Darwin\n"
-    set background=dark
-    colorscheme tomorrow-night
-    set guifont=inconsolata:h12
-  endif
-  if has("gui_running")
-    set background=light
-    colorscheme PaperColor
-  endif
+if s:darwin
+  set background=dark
+  colorscheme tomorrow-night
+  set guifont=inconsolata:h12
+endif
+if has("gui_running")
+  set background=light
+  colorscheme PaperColor
 endif
 
 set showmatch " Highlight matching brackets
@@ -169,12 +170,16 @@ set showmatch " Highlight matching brackets
 set wrap " Wrap lines
 set wrapmargin=2 " Stay 2 chars from side
 set linebreak " Smarter wrapping
-if version > 7.3
+if v:version > 703
   set breakindent " Indent wrapped lines to same level
 endif
 
 set expandtab " Expand tabs to spaces
-set tabstop=2 shiftwidth=2 " Tab is 2 spaces
+if s:darwin
+  set tabstop=2 shiftwidth=2 " Tab is 2 spaces
+else
+  set tabstop=3 shiftwidth=3
+endif
 
 " Searching
 set magic  " Use magic regexes
@@ -187,7 +192,6 @@ set gdefault " Default substitute all matches on a line
 set autoindent " Automatically indent
 set smartindent " Indent wisely
 
-set vb " Don't beep
 set noerrorbells " Don't beep
 
 set guioptions-=r
@@ -221,8 +225,10 @@ set cursorline
 autocmd WinEnter * setlocal cursorline
 autocmd WinLeave * setlocal nocursorline
 
-set list
-set listchars=tab:»\ ,trail:·,extends:>,precedes:<,nbsp:+,eol:¬
+if s:darwin
+  set list
+  set listchars=tab:»\ ,trail:·,extends:>,precedes:<,nbsp:+,eol:¬
+endif
 
 set sessionoptions-=options
 
@@ -233,9 +239,8 @@ set completeopt=menuone
 set splitright
 set virtualedit=block
 
-if version > 7.3
+if v:version > 703
   set conceallevel=0
-
   set cryptmethod=blowfish
 endif
 
@@ -244,7 +249,7 @@ filetype plugin indent on
 set pastetoggle=<F2> " Toggle to paste mode
 set clipboard=unnamed
 
-if version > 7.3
+if v:version >= 703
   set undofile
 endif
 set undolevels=1000
