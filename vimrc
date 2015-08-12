@@ -74,6 +74,11 @@ if s:darwin
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'tmux-plugins/vim-tmux-focus-events'
   Plug 'tpope/vim-dispatch'
+else
+  nnoremap <C-l> <C-w>l
+  nnoremap <C-k> <C-w>k
+  nnoremap <C-j> <C-w>j
+  nnoremap <C-h> <C-w>h
 endif
 
 " Completing and snippets
