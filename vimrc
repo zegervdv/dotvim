@@ -403,9 +403,6 @@ autocmd BufReadPost *
 " Resize splits after window resize
 au VimResized * exe "normal! \<c-w>="
 
-" Reload vimrc on save
-autocmd BufWritePost $MYVIMRC source $MYVIMRC
-
 " Custom folding by Steve Losh
 function! MyFoldText() " {{{
   let line = getline(v:foldstart)
@@ -540,14 +537,28 @@ endfunction
 " FZF {{{
 " nnoremap <silent> <C-p> :call fzf#run({'tmux_height': '20%', 'sink': 'e'})<CR>
 " }}}
-" CommandT {{{
-let g:CommandTMaxHeight = 20
-let g:CommandTMatchWindowReverse = 1
-let g:CommandTCancelMap = ['<ESC>','<C-c>']
-
-" }}}
 " Projectionist {{{
 let g:projectionist_heuristics = {
+      \ "sourceme.sh": {
+      \   "design/**/rtl/*.rtl.vhd": {
+      \     "type": "rtl",
+      \     "alternate": "design/{dirname}/rtl/{basename}.entity.vhd"
+      \   },
+      \   "design/**/rtl/*.entity.vhd": {
+      \     "type": "entity",
+      \     "alternate": "design/{dirname}/rtl/{basename}.rtl.vhd"
+      \   },
+      \   "verification/tcl/*.tcl": {
+      \     "type": "verification",
+      \   },
+      \   "test/*/test.tcl": {
+      \     "type": "test"
+      \   },
+      \   "test/*/case.do": {
+      \     "type": "case"
+      \   },
+      \   "*": { "make": "source sourceme.sh -a && cd compile_scripts && make" },
+      \ },
       \ "*.c": {
       \   "*.c": {
       \     "alternate": "{}.h",
@@ -566,9 +577,6 @@ let g:projectionist_heuristics = {
       \   "*.py": { "make": "ipython {}" }
       \ },
       \ }
-" }}}
-" Language Tool {{{
-let g:languagetool_jar='/usr/local/opt/languagetool/libexec/languagetool-commandline.jar'
 " }}}
 " YouCompleteMe {{{
 let g:ycm_global_ycm_extra_conf = "~/.vim/ycm_extra_conf.py"
