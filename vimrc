@@ -163,7 +163,7 @@ set scrolloff=4 " Stay 4 lines from top/bottom
 if s:darwin
   set background=dark
   colorscheme tomorrow-night
-  set guifont=inconsolata:h12
+  set guifont=inconsolata:h13
 endif
 if has("gui_running")
   set background=light
@@ -291,7 +291,7 @@ function! Status()
   endif
 
   if !empty(head)
-    let statusline .=  ' on %#preproc#' . head . '%* '
+    let statusline .=  ' on ' . head . '%* '
   endif
   return statusline
 endfunction
