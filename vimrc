@@ -69,6 +69,8 @@ Plug 'xolox/vim-easytags'
 " Undoing
 Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
 
+" Pasting
+Plug 'junegunn/vim-peekaboo'
 " Tmux
 if s:darwin
   Plug 'christoomey/vim-tmux-navigator'
@@ -216,7 +218,7 @@ set lazyredraw " No need to redraw constantly
 set ttimeoutlen=10 " Set the timeout to a minimum
 set diffopt+=iwhite " Ignore spaces in diffs"
 
-set tags=.git/tags
+set tags=.git/tags,tags
 
 set formatoptions=
 set formatoptions+=c " Format comments
