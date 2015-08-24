@@ -53,7 +53,7 @@ endif
 if s:darwin
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
   Plug 'ctrlpvim/ctrlp.vim'
-  Plug 'nixprime/cpsm', { 'do': './install.sh'}
+  " Plug 'nixprime/cpsm', { 'do': './install.sh'}
 endif
 
 " Command line
@@ -209,7 +209,7 @@ set guioptions-=L
 
 set history=100 " Set history 100
 set wildmenu " Command completion
-set wildmode=full " Complete to fullest match
+set wildmode=longest:full " Complete to fullest match
 set ttyfast " Use a fast terminal
 set lazyredraw " No need to redraw constantly
 
@@ -242,7 +242,7 @@ set sessionoptions-=options
 
 " Scan files for completion
 set complete=.,w,b,u,k,kspell,t,i,d
-set completeopt=menuone
+set completeopt=menuone,longest,preview
 
 set splitright
 set virtualedit=block
