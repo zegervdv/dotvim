@@ -62,9 +62,9 @@ Plug 'tpope/vim-eunuch', { 'on' : ['Remove', 'Unlink', 'Move', 'Rename', 'Mkdir'
 " Syntax and checking
 if s:darwin
   Plug 'scrooloose/syntastic'
+  Plug 'xolox/vim-misc'
+  Plug 'xolox/vim-easytags'
 endif
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-easytags'
 
 " Undoing
 Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
