@@ -88,7 +88,7 @@ endif
 " Plug 'shougo/neosnippet.vim'
 " Plug 'shougo/neosnippet-snippets'
 if s:darwin
-  Plug 'valloric/youcompleteme', {'do': './install.sh --clang-completer --system-libclang'}
+  Plug 'valloric/youcompleteme', {'do': './install.py --clang-completer' }
 endif
 if v:version > 703
   Plug 'sirver/ultisnips'
