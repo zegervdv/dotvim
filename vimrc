@@ -44,9 +44,8 @@ Plug 'tpope/vim-commentary'
 Plug 'wellle/targets.vim'
 " Plug 'ervandew/ag'
 " Plug 'gabesoft/vim-ags'
-if s:darwin
-  Plug 'rking/ag.vim'
-endif
+
+Plug 'wincent/ferret'
 
 " Finding files
 if s:darwin
@@ -70,6 +69,7 @@ Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
 
 " Pasting
 Plug 'junegunn/vim-peekaboo'
+
 " Tmux
 if s:darwin
   Plug 'christoomey/vim-tmux-navigator'
@@ -86,9 +86,9 @@ endif
 " Plug 'shougo/neocomplete.vim'
 " Plug 'shougo/neosnippet.vim'
 " Plug 'shougo/neosnippet-snippets'
-if s:darwin
-  Plug 'valloric/youcompleteme', {'do': './install.py --clang-completer' }
-endif
+" Plug 'valloric/youcompleteme', {'do': './install.py --clang-completer' }
+Plug 'ervandew/supertab'
+
 if v:version > 703
   Plug 'sirver/ultisnips'
   Plug 'honza/vim-snippets'
@@ -270,7 +270,7 @@ if v:version >= 703
   set undodir=~/.vim/tmp/undo/,.
 endif
 
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.bin,*.elf,*.hex,*.eps,.git/**
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.bin,*.elf,*.hex,*.eps,.git/**,*.dup
 
 " }}}
 " Status line {{{
@@ -315,7 +315,7 @@ map k gk
 
 " Remap tag-search to better place
 nnoremap <C-$> <C-]>
-nnoremap <C-)> <C-w>}
+nnoremap <C-m> <C-]>
 
 " Jump to end of line in insert mode
 inoremap <C-a> <C-o>I
@@ -505,35 +505,12 @@ let g:syntastic_check_on_open=1
 nnoremap <leader>u :GundoToggle<CR>
 " }}}
 " Dispatch {{{
-nnoremap <leader>s :Make<CR>
+nnoremap <leader>m :Make<CR>
 " }}}
 " Easytags {{{
 let g:easytags_dynamic_files = 1
 let g:easytags_events = ['BufWritePost']
 let g:easytags_async = 1
-" }}}
-" Ag {{{
-" Ack motions by Steve Losh, adapted for Ag
-nnoremap <silent> <Leader>a :set opfunc=<SID>AckMotion<CR>g@
-xnoremap <silent> <Leader>a :<C-U>call <SID>AckMotion(visualmode())<CR>
-
-function! s:CopyMotionForType(type)
-    if a:type ==# 'v'
-        silent execute "normal! `<" . a:type . "`>y"
-    elseif a:type ==# 'char'
-        silent execute "normal! `[v`]y"
-    endif
-endfunction
-
-function! s:AckMotion(type) abort
-    let reg_save = @@
-
-    call s:CopyMotionForType(a:type)
-
-    execute "normal! :Ag --literal " . shellescape(@@) . "\<cr>"
-
-    let @@ = reg_save
-endfunction
 " }}}
 " FZF {{{
 " nnoremap <silent> <C-p> :call fzf#run({'tmux_height': '20%', 'sink': 'e'})<CR>
