@@ -50,9 +50,9 @@ Plug 'wincent/ferret'
 " Finding files
 if s:darwin
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
-  Plug 'ctrlpvim/ctrlp.vim'
   " Plug 'nixprime/cpsm', { 'do': './install.sh'}
 endif
+Plug 'kien/ctrlp.vim'
 
 " Command line
 Plug 'tpope/vim-eunuch', { 'on' : ['Remove', 'Unlink', 'Move', 'Rename', 'Mkdir', 'Chmod', 'Find', 'Locate', 'SudoEdit', 'SudoWrite']}
@@ -315,7 +315,7 @@ map k gk
 
 " Remap tag-search to better place
 nnoremap <C-$> <C-]>
-nnoremap <C-m> <C-]>
+nnoremap <C-y> <C-]>
 
 " Jump to end of line in insert mode
 inoremap <C-a> <C-o>I
