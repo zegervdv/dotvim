@@ -21,10 +21,10 @@ Plug 'tpope/vim-rsi'
 Plug 'vim-scripts/gitignore'
 Plug 'einfachtoll/didyoumean'
 
-if s:darwin
-  " Session Management
-  Plug 'tpope/vim-obsession'
+" Session Management
+Plug 'tpope/vim-obsession'
 
+if s:darwin
   " Spelling
   Plug 'tpope/vim-abolish'
 endif
@@ -197,6 +197,7 @@ set gdefault " Default substitute all matches on a line
 
 set autoindent " Automatically indent
 set smartindent " Indent wisely
+set cindent
 
 if s:darwin
   set vb
@@ -489,6 +490,8 @@ let g:tlist_vhdl_settings   = 'vhdl;d:package declarations;b:package bodies;e:en
 " Spice {{{
 autocmd BufRead *.{net,lib} set filetype=spice
 " }}}
+"" TCL {{{
+autocmd FileType tcl setlocal commandstring=#\ %s
 
 " Plugin settings
 " Easy-align {{{
