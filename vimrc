@@ -102,6 +102,10 @@ Plug 'tpope/vim-projectionist'
 Plug 'w0ng/vim-hybrid'
 Plug 'NLKNguyen/papercolor-theme'
 
+"Tcl
+Plug 'tcl.vim--smithfield'
+Plug 'tcl.vim--smithfield-indent'
+
 if s:darwin
   " Ruby
   Plug 'tpope/vim-rails', { 'for': 'ruby' }
