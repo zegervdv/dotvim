@@ -491,7 +491,7 @@ let g:tlist_vhdl_settings   = 'vhdl;d:package declarations;b:package bodies;e:en
 autocmd BufRead *.{net,lib} set filetype=spice
 " }}}
 "" TCL {{{
-autocmd FileType tcl setlocal commandstring=#\ %s
+autocmd FileType tcl setlocal commentstring=#\ %s
 
 " Plugin settings
 " Easy-align {{{
