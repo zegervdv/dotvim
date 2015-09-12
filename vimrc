@@ -200,8 +200,8 @@ set smartcase " Be case sensitive if at least one uppercase char is used
 set gdefault " Default substitute all matches on a line
 
 set autoindent " Automatically indent
-set smartindent " Indent wisely
-set cindent
+set cindent " Indent based on C syntax
+set cinwords+=foreach
 
 if s:darwin
   set vb
