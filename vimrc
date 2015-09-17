@@ -153,9 +153,9 @@ set nocompatible
 set backspace=2
 
 " Buffers
-set autowrite " Write file when exiting
 set autoread " Read external changes
 set hidden " Change between buffers without saving
+set autowriteall " Write changes when losing focus
 
 " Visuals
 set number
@@ -496,6 +496,7 @@ autocmd BufRead *.{net,lib} set filetype=spice
 " }}}
 "" TCL {{{
 autocmd FileType tcl setlocal commentstring=#\ %s
+autocmd BufRead *.do set filetype=tcl
 
 " Plugin settings
 " Easy-align {{{
