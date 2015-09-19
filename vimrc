@@ -368,6 +368,9 @@ vnoremap <C-V>     v
 " Use backspace as delete in visual mode
 vmap <BS> x
 
+" Redraw screen
+nnoremap <F3> :redraw!<CR>
+
 " Keep selection when shifting
 vmap <expr> > KeepVisualSelection(">")
 vmap <expr> < KeepVisualSelection("<")
@@ -445,6 +448,9 @@ function! CheckFileType()
     autocmd! newFileDetection
   endif
 endfunction
+
+" Write all files when losing focus
+autocmd FocusLost * silent! wa
 
 " }}}
 
