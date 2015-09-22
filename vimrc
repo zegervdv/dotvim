@@ -326,9 +326,6 @@ nnoremap <C-y> <C-]>
 inoremap <C-a> <C-o>I
 inoremap <C-e> <C-o>A
 
-nnoremap <C-a> ^
-nnoremap <C-e> $
-
 nnoremap <C-s> <C-e>
 
 nnoremap + <C-a>
@@ -500,9 +497,10 @@ let g:tlist_vhdl_settings   = 'vhdl;d:package declarations;b:package bodies;e:en
 " Spice {{{
 autocmd BufRead *.{net,lib} set filetype=spice
 " }}}
-"" TCL {{{
+" TCL {{{
 autocmd FileType tcl setlocal commentstring=#\ %s
 autocmd BufRead *.do set filetype=tcl
+" }}}
 
 " Plugin settings
 " Easy-align {{{
