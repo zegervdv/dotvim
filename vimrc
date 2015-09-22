@@ -381,10 +381,6 @@ function! KeepVisualSelection(cmd)
   endif
 endfunction
 
-" Some emacs behavior 
-cnoremap <c-a> <home>
-cnoremap <c-e> <end>
-
 " Swap backticks and quotes
 nnoremap ` '
 nnoremap ' `
