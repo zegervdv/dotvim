@@ -74,13 +74,14 @@ Plug 'junegunn/vim-peekaboo'
 if s:darwin
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'tmux-plugins/vim-tmux-focus-events'
-  Plug 'tpope/vim-dispatch'
 else
   nnoremap <C-l> <C-w>l
   nnoremap <C-k> <C-w>k
   nnoremap <C-j> <C-w>j
   nnoremap <C-h> <C-w>h
 endif
+
+Plug 'tpope/vim-dispatch'
 
 " Completing and snippets
 " Plug 'shougo/neocomplete.vim'
@@ -105,6 +106,7 @@ Plug 'NLKNguyen/papercolor-theme'
 "Tcl
 Plug 'tcl.vim--smithfield'
 Plug 'tcl.vim--smithfield-indent'
+Plug 'tcl_itcl.vim'
 
 if s:darwin
   " Ruby
@@ -592,4 +594,3 @@ endif
 if filereadable(".vimrc.local")
   source .vimrc.local
 endif
-
