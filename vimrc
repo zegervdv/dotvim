@@ -324,10 +324,6 @@ map k gk
 nnoremap <C-$> <C-]>
 nnoremap <C-y> <C-]>
 
-" Jump to end of line in insert mode
-inoremap <C-a> <C-o>I
-inoremap <C-e> <C-o>A
-
 nnoremap <C-s> <C-e>
 
 nnoremap + <C-a>
