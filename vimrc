@@ -214,6 +214,9 @@ set guioptions-=r
 set guioptions-=l
 set guioptions-=R
 set guioptions-=L
+set guioptions-=a
+set guioptions-=m
+set guioptions-=T
 
 set history=100 " Set history 100
 set wildmenu " Command completion
