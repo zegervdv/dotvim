@@ -483,6 +483,22 @@ function! s:Hex2dec(line1, line2, arg) range
     echo (a:arg =~? '^0x') ? a:arg + 0 : ('0x'.a:arg) + 0
   endif
 endfunction
+
+" Recognize filetype for dup files
+autocmd! BufRead *.dup call DupSetSyntax(@%)
+
+function! DupSetSyntax(name)
+  let extension = matchlist(a:name, '\v.+.\.([^\.]+).dup')[1]
+  if extension == "vhd"
+    setlocal filetype=vhdl
+  elseif extension == "v"
+    setlocal filetype=verilog
+  elseif extension == "sv"
+    setlocal filetype=verilog
+  else
+    echo "Unknown filetype"
+  endif
+endfunction
 " }}}
 
 " Filetype specific settings
