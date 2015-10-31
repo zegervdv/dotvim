@@ -393,6 +393,15 @@ nnoremap gb yiW:!open <C-r>*<CR><CR>
 " Open vimrc
 nnoremap <leader>ev :e $MYVIMRC<CR>
 nnoremap <leader>sv :so $MYVIMRC<CR>
+
+" Open dup in diffmode
+nnoremap <leader>d :call OpenDup(@%)<CR>
+
+function! OpenDup(file)
+  let l:filename = a:file . ".dup"
+  execute 'vsplit' l:filename
+  windo diffthis
+endfunction
 " }}}
 
 " Functions {{{
