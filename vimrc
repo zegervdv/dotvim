@@ -221,7 +221,7 @@ set guioptions-=T
 
 set history=100 " Set history 100
 set wildmenu " Command completion
-set wildmode=longest:full " Complete to fullest match
+set wildmode=full " Complete to fullest match
 set ttyfast " Use a fast terminal
 set lazyredraw " No need to redraw constantly
 
@@ -526,7 +526,9 @@ au FileType c setlocal foldmethod=syntax
 " }}}
 " VHDL {{{
 " VHDL ctags
-let g:tlist_vhdl_settings   = 'vhdl;d:package declarations;b:package bodies;e:entities;a:architecture specifications;t:type declarations;p:processes;f:functions;r:procedures'
+let g:tlist_vhdl_settings = 'vhdl;d:package declarations;b:package bodies;e:entities;a:architecture specifications;t:type declarations;p:processes;f:functions;r:procedures'
+let g:vhdl_indent_genportmap =0
+let g:vhdl_indent_rhassign = 1
 " }}}
 " Spice {{{
 autocmd BufRead *.{net,lib} set filetype=spice
