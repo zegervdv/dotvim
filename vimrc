@@ -32,7 +32,8 @@ endif
 
 " Brackets
 Plug 'tpope/vim-surround'
-Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs'
+Plug 'cohama/lexima.vim'
 
 " Formatting
 Plug 'junegunn/vim-easy-align'
@@ -281,7 +282,7 @@ if v:version >= 703
   set undodir=~/.vim/tmp/undo/,.
 endif
 
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.bin,*.elf,*.hex,*.eps,.git/**,*.dup
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.bin,*.elf,*.hex,*.eps,.git/**,*.dup,.hg/**
 
 " }}}
 " Status line {{{
