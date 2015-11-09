@@ -72,6 +72,9 @@ Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
 " Pasting
 Plug 'junegunn/vim-peekaboo'
 
+" Tabs
+Plug 'gcmt/taboo.vim'
+
 " Tmux
 if s:darwin
   Plug 'christoomey/vim-tmux-navigator'
