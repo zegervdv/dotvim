@@ -52,7 +52,7 @@ Plug 'wincent/ferret'
 " Finding files
 if s:darwin
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
-  " Plug 'nixprime/cpsm', { 'do': './install.sh'}
+  Plug 'nixprime/cpsm', { 'do': './install.sh'}
 endif
 Plug 'ctrlpvim/ctrlp.vim'
 
