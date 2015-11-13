@@ -558,6 +558,10 @@ au FileType c setlocal foldmethod=syntax
 let g:tlist_vhdl_settings = 'vhdl;d:package declarations;b:package bodies;e:entities;a:architecture specifications;t:type declarations;p:processes;f:functions;r:procedures'
 let g:vhdl_indent_genportmap =0
 let g:vhdl_indent_rhassign = 1
+autocmd! FileType vhdl call SetAutoAlign()
+function! SetAutoAlign()
+  inoremap <silent> => =><ESC>mzvip:EasyAlign/=>/<CR>`z$a
+endfunction
 " }}}
 " Spice {{{
 autocmd BufRead *.{net,lib} set filetype=spice
