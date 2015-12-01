@@ -16,6 +16,7 @@ call plug#begin('~/.vim/plugged')
 " General Plugins
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rsi'
 Plug 'vim-scripts/gitignore'
@@ -166,6 +167,7 @@ set autowriteall " Write changes when losing focus
 
 " Visuals
 set number
+set relativenumber
 set ruler
 syntax on
 set title
@@ -280,9 +282,9 @@ set undolevels=1000
 set backup
 set viminfo+=n~/.vim/.viminfo
 set backupdir=~/.vim/tmp/backup/,.
-set directory=~/.vim/tmp/swap/,.
+set directory=~/.vim/tmp/swap//,.
 if v:version >= 703
-  set undodir=~/.vim/tmp/undo/,.
+  set undodir=~/.vim/tmp/undo//,.
 endif
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.bin,*.elf,*.hex,*.eps,.git/**,*.dup,.hg/**
