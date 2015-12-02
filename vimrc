@@ -33,8 +33,7 @@ endif
 
 " Brackets
 Plug 'tpope/vim-surround'
-" Plug 'jiangmiao/auto-pairs'
-Plug 'cohama/lexima.vim'
+Plug 'jiangmiao/auto-pairs'
 
 " Formatting
 Plug 'junegunn/vim-easy-align'
@@ -571,6 +570,20 @@ autocmd BufRead *.{net,lib} set filetype=spice
 " TCL {{{
 autocmd FileType tcl setlocal commentstring=#\ %s
 autocmd BufRead *.do set filetype=tcl
+" }}}
+" GPG {{{
+" Don't save backups of gpg asc files
+set backupskip+=*.asc
+
+" Convenient editing of ascii-armoured encrypted files
+augroup GPGASCII
+  au!
+  au BufReadPost *.asc :%!gpg -q -d
+  au BufReadPost *.asc |redraw
+  au BufWritePre *.asc :%!gpg -q -e -a
+  au BufWritePost *.asc u
+  au VimLeave *.asc :!clear
+augroup END
 " }}}
 
 " Plugin settings
