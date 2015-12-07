@@ -26,10 +26,8 @@ Plug 'ludovicchabant/vim-lawrencium'
 " Session Management
 Plug 'tpope/vim-obsession'
 
-if s:darwin
-  " Spelling
-  Plug 'tpope/vim-abolish'
-endif
+" Spelling
+Plug 'tpope/vim-abolish'
 
 " Brackets
 Plug 'tpope/vim-surround'
@@ -38,6 +36,9 @@ Plug 'jiangmiao/auto-pairs'
 " Formatting
 Plug 'junegunn/vim-easy-align'
 " Plug 'AndrewRadev/splitjoin.vim'
+
+" Arguments
+Plug 'PeterRincker/vim-argumentative'
 
 " Comments
 Plug 'tpope/vim-commentary'
@@ -586,6 +587,7 @@ augroup GPGASCII
 augroup END
 " }}}
 
+
 " Plugin settings
 " Easy-align {{{
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
@@ -672,6 +674,12 @@ else
 endif
 let g:ctrlp_switch_buffer = 't'
 " let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
+" }}}
+" Argumentative {{{
+nmap (, <Plug>Argumentative_Prev
+nmap ), <Plug>Argumentative_Next
+xmap (, <Plug>Argumentative_XPrev
+xmap ), <Plug>Argumentative_XNext
 " }}}
 
 
