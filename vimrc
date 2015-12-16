@@ -673,6 +673,8 @@ else
       \ }
 endif
 let g:ctrlp_switch_buffer = 't'
+nnoremap <C-j> :CtrlPBuffer<CR>
+
 " let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
 " }}}
 " Argumentative {{{
