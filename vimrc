@@ -248,8 +248,11 @@ set formatoptions+=1 " Break before 1-letter words
 
 " Enable cursorline
 set cursorline
-autocmd WinEnter * setlocal cursorline
-autocmd WinLeave * setlocal nocursorline
+augroup cline
+  au!
+  autocmd WinEnter * setlocal cursorline
+  autocmd WinLeave * setlocal nocursorline
+augroup END
 
 if s:darwin
   set list
@@ -283,9 +286,20 @@ set backup
 set viminfo+=n~/.vim/.viminfo
 set backupdir=~/.vim/tmp/backup/,.
 set directory=~/.vim/tmp/swap//,.
+if !isdirectory(expand(&backupdir))
+  call mkdir(expand(&backupdir), "p")
+endif
+if !isdirectory(expand(&directory))
+  call mkdir(expand(&directory), "p")
+endif
+
 if v:version >= 703
   set undodir=~/.vim/tmp/undo//,.
+  if !isdirectory(expand(&undodir))
+    call mkdir(expand(&undodir), "p")
+  endif
 endif
+
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.bin,*.elf,*.hex,*.eps,.git/**,*.dup,.hg/**
 
@@ -408,6 +422,9 @@ function! OpenDup(file)
   execute 'vsplit' l:filename
   windo diffthis
 endfunction
+
+" Do not move on *
+nnoremap <silent> * :let stay_star_view = winsaveview()<cr>*:call winrestview(stay_star_view)<cr>
 " }}}
 
 " Functions {{{
@@ -442,7 +459,8 @@ set foldtext=MyFoldText()
 
 " Detect Filetype from content if file has no extension
 augroup newFileDetection
-autocmd CursorMovedI * call CheckFileType()
+  au!
+  autocmd CursorMovedI * call CheckFileType()
 augroup END
 
 function! CheckFileType()
@@ -540,37 +558,57 @@ augroup END
 let g:vim_markdown_folding_disabled=1
 " }}}
 " Text {{{
-au BufNewFile,BufRead,BufEnter *.txt setlocal spell spelllang=en_gb
-au BufNewFile,BufRead,BufEnter *.txt setlocal textwidth=0
+augroup ft_text
+  au!
+  au BufNewFile,BufRead,BufEnter *.txt setlocal spell spelllang=en_gb
+  au BufNewFile,BufRead,BufEnter *.txt setlocal textwidth=0
+augroup END
 " }}}
 " Git commit messages {{{
-au FileType gitcommit setlocal spell spelllang=en_gb
+augroup ft_git
+  au!
+  au FileType gitcommit setlocal spell spelllang=en_gb
+augroup END
 " }}}
 " Ruby {{{
-autocmd BufRead *_spec.rb set filetype=rspec
+augroup ft_ruby
+  au!
+  autocmd BufRead *_spec.rb set filetype=rspec
+augroup END
 " }}}
 " Matlab {{{
-autocmd FileType matlab setlocal commentstring=\%\ %s
+augroup ft_matlab
+  au!
+  autocmd FileType matlab setlocal commentstring=\%\ %s
+augroup END
 " }}}
 " C {{{
-au FileType c setlocal foldmethod=syntax
+augroup ft_c
+  au!
+  au FileType c setlocal foldmethod=syntax
+augroup END
 " }}}
 " VHDL {{{
 " VHDL ctags
 let g:tlist_vhdl_settings = 'vhdl;d:package declarations;b:package bodies;e:entities;a:architecture specifications;t:type declarations;p:processes;f:functions;r:procedures'
 let g:vhdl_indent_genportmap =0
 let g:vhdl_indent_rhassign = 1
-autocmd! FileType vhdl call SetAutoAlign()
+
+augroup ft_vhdl
+  au!
+  autocmd FileType vhdl call SetAutoAlign()
+augroup END
+
 function! SetAutoAlign()
   inoremap <silent> => =><ESC>mzvip:EasyAlign/=>/<CR>`z$a
 endfunction
 " }}}
-" Spice {{{
-autocmd BufRead *.{net,lib} set filetype=spice
-" }}}
 " TCL {{{
-autocmd FileType tcl setlocal commentstring=#\ %s
-autocmd BufRead *.do set filetype=tcl
+augroup ft_tcl
+  au!
+  autocmd FileType tcl setlocal commentstring=#\ %s
+  autocmd BufRead *.do set filetype=tcl
+augroup END
 " }}}
 " GPG {{{
 " Don't save backups of gpg asc files
@@ -673,7 +711,6 @@ else
       \ }
 endif
 let g:ctrlp_switch_buffer = 't'
-nnoremap <C-j> :CtrlPBuffer<CR>
 
 " let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
 " }}}
