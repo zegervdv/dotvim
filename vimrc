@@ -108,6 +108,7 @@ Plug 'tpope/vim-projectionist'
 " Theme
 Plug 'w0ng/vim-hybrid'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'kristijanhusak/vim-hybrid-material'
 
 "Tcl
 Plug 'tcl.vim--smithfield'
