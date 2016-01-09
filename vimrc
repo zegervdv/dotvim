@@ -439,7 +439,16 @@ autocmd BufReadPost *
       \ endif
 
 " Resize splits after window resize
-au VimResized * exe "normal! \<c-w>="
+augroup vim_resize
+  au!
+  au VimResized * exe "normal! \<c-w>="
+augroup END
+
+augroup reload_vim
+  au!
+  au BufWritePost .vimrc,vimrc so $MYVIMRC
+augroup END
+
 
 " Custom folding by Steve Losh
 function! MyFoldText() " {{{
@@ -478,9 +487,6 @@ function! CheckFileType()
     autocmd! newFileDetection
   endif
 endfunction
-
-" Write all files when losing focus
-autocmd FocusLost * silent! wa
 
 " Convert hex <-> decimal
 command! -nargs=? -range Dec2hex call s:Dec2hex(<line1>, <line2>, '<args>')
