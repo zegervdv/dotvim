@@ -303,7 +303,7 @@ if v:version >= 703
 endif
 
 
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.bin,*.elf,*.hex,*.eps,.git/**,*.dup,.hg/**
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.bin,*.elf,*.hex,*.eps,.git/**,*.dup,.hg/**,*.orig,*.*~
 
 " }}}
 " Status line {{{
@@ -725,7 +725,7 @@ xmap ), <Plug>Argumentative_XNext
 " }}}
 " Grep {{{
 let Grep_Skip_Dirs = '.git .hg'
-let Grep_Skip_Files = '*.orig *.dup *.*~'
+let Grep_Skip_Files = join(split(&wildignore, ','), ' ')
 " }}}
 
 
