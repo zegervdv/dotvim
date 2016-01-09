@@ -45,10 +45,11 @@ Plug 'tpope/vim-commentary'
 
 " Moving in files
 Plug 'wellle/targets.vim'
-" Plug 'ervandew/ag'
-" Plug 'gabesoft/vim-ags'
 
-Plug 'wincent/ferret'
+if s:darwin
+  Plug 'ervandew/ag'
+endif
+Plug 'yegappan/grep'
 
 " Finding files
 if s:darwin
@@ -598,6 +599,7 @@ let g:vhdl_indent_rhassign = 1
 augroup ft_vhdl
   au!
   autocmd FileType vhdl call SetAutoAlign()
+  autocmd FileType vhdl setlocal commentstring=--\ %s
 augroup END
 
 function! SetAutoAlign()
@@ -720,6 +722,10 @@ nmap (, <Plug>Argumentative_Prev
 nmap ), <Plug>Argumentative_Next
 xmap (, <Plug>Argumentative_XPrev
 xmap ), <Plug>Argumentative_XNext
+" }}}
+" Grep {{{
+let Grep_Skip_Dirs = '.git .hg'
+let Grep_Skip_Files = '*.orig *.dup *.*~'
 " }}}
 
 
