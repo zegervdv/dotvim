@@ -21,7 +21,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rsi'
 Plug 'vim-scripts/gitignore'
 Plug 'einfachtoll/didyoumean'
-Plug 'ludovicchabant/vim-lawrencium'
 
 " Session Management
 Plug 'tpope/vim-obsession'
@@ -36,9 +35,6 @@ Plug 'jiangmiao/auto-pairs'
 " Formatting
 Plug 'junegunn/vim-easy-align'
 " Plug 'AndrewRadev/splitjoin.vim'
-
-" Arguments
-Plug 'PeterRincker/vim-argumentative'
 
 " Comments
 Plug 'tpope/vim-commentary'
@@ -97,11 +93,6 @@ Plug 'tpope/vim-dispatch'
 " Plug 'valloric/youcompleteme', {'do': './install.py --clang-completer' }
 Plug 'ervandew/supertab'
 
-if v:version > 703
-  Plug 'sirver/ultisnips'
-  Plug 'honza/vim-snippets'
-endif
-
 " Vim file navigation
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-projectionist'
@@ -109,12 +100,11 @@ Plug 'tpope/vim-projectionist'
 " Theme
 Plug 'w0ng/vim-hybrid'
 Plug 'NLKNguyen/papercolor-theme'
-Plug 'kristijanhusak/vim-hybrid-material'
 
 "Tcl
-Plug 'tcl.vim--smithfield'
-Plug 'tcl.vim--smithfield-indent'
-Plug 'tcl_itcl.vim'
+Plug 'tcl.vim--smithfield', { 'for': 'tcl' }
+Plug 'tcl.vim--smithfield-indent', { 'for': 'tcl'}
+Plug 'tcl_itcl.vim', { 'for': 'tcl' }
 
 if s:darwin
   " Ruby
@@ -701,11 +691,6 @@ let g:projectionist_heuristics = {
       \ },
       \ }
 " }}}
-" UltiSnips {{{
-let g:UltiSnipsExpandTrigger = "<c-j>"
-let g:UltiSnipsJumpForwardTrigger = "<c-k>"
-let g:UltiSnipsJumpBackwardTrigger = "<c-z>"
-" }}}
 " CtrlP {{{
 if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
@@ -722,12 +707,6 @@ endif
 let g:ctrlp_switch_buffer = 't'
 
 " let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
-" }}}
-" Argumentative {{{
-nmap (, <Plug>Argumentative_Prev
-nmap ), <Plug>Argumentative_Next
-xmap (, <Plug>Argumentative_XPrev
-xmap ), <Plug>Argumentative_XNext
 " }}}
 " Grep {{{
 let Grep_Skip_Dirs = '.git .hg'
