@@ -434,6 +434,7 @@ augroup vim_resize
   au VimResized * exe "normal! \<c-w>="
 augroup END
 
+" Automatically reload vimrc when saving
 augroup reload_vim
   au!
   au BufWritePost .vimrc,vimrc so $MYVIMRC
@@ -530,9 +531,23 @@ function! DupSetSyntax(name)
     echo "Unknown filetype"
   endif
 endfunction
+
+" Create arguments list from files in quickfix list
+" Allows to Grep for a pattern and apply an argdo command on each of the
+" matching files
+command! -nargs=0 -bar Qargs execute 'args' QuickfixFilenames()
+function! QuickfixFilenames()
+  " Building a hash ensures we get each buffer only once
+  let buffer_numbers = {}
+  for quickfix_item in getqflist()
+    let buffer_numbers[quickfix_item['bufnr']] = bufname(quickfix_item['bufnr'])
+    echo quickfix_item.bufnr
+  endfor
+  return join(map(values(buffer_numbers), 'fnameescape(v:val)'))
+endfunction
 " }}}
 
-" Filetype specific settings
+" Filetype specific settings {{{
 " Latex {{{
 " Open pdf
 " nnoremap <leader>v :!open -a /Applications/TeX/TeXShop.app %:r.pdf<CR><CR>
@@ -623,9 +638,9 @@ augroup GPGASCII
   au VimLeave *.asc :!clear
 augroup END
 " }}}
+" }}}
 
-
-" Plugin settings
+" Plugin settings {{{
 " Easy-align {{{
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vmap <Enter> <Plug>(EasyAlign)
@@ -711,6 +726,7 @@ let g:ctrlp_switch_buffer = 't'
 " Grep {{{
 let Grep_Skip_Dirs = '.git .hg'
 let Grep_Skip_Files = join(split(&wildignore, ','), ' ')
+" }}}
 " }}}
 
 
