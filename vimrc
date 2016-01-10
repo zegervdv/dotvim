@@ -549,8 +549,7 @@ endfunction
 " Filetype specific settings {{{
 " Latex {{{
 " Open pdf
-" nnoremap <leader>v :!open -a /Applications/TeX/TeXShop.app %:r.pdf<CR><CR>
-nnoremap <silent> <leader>v :!zathura %:r.pdf > /dev/null 2>&1&<CR><CR>
+nnoremap <leader>v :!open -a /Applications/TeX/TeXShop.app %:r.pdf<CR><CR>
 
 function! Latexprog()
   if !filereadable("./Makefile")
