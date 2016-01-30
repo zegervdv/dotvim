@@ -30,7 +30,7 @@ Plug 'tpope/vim-abolish'
 
 " Brackets
 Plug 'tpope/vim-surround'
-Plug 'jiangmiao/auto-pairs'
+Plug 'raimondi/delimitmate'
 
 " Formatting
 Plug 'junegunn/vim-easy-align'
@@ -72,6 +72,8 @@ Plug 'junegunn/vim-peekaboo'
 
 " Tabs
 Plug 'gcmt/taboo.vim'
+
+Plug '~/Documents/projects/Nagelfar-Vim'
 
 " Tmux
 if s:darwin
@@ -368,13 +370,6 @@ nnoremap gV `[v`]
 
 " Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
-
-" Swap v and CTRL-V
-nnoremap    v   <C-V>
-nnoremap <C-V>     v
-
-vnoremap    v   <C-V>
-vnoremap <C-V>     v
 
 " Use backspace as delete in visual mode
 vmap <BS> x
@@ -726,6 +721,13 @@ let Grep_Skip_Dirs = '.git .hg'
 let Grep_Skip_Files = join(split(&wildignore, ','), ' ')
 " }}}
 " }}}
+
+augroup ft_tcl
+  au!
+  au FileType tcl compiler nagelfar
+augroup END
+
+let g:nagelfar_file = '~/Documents/projects/nagelfar/nagelfar.tcl'
 
 
 " Load local vimrc
