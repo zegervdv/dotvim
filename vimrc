@@ -73,7 +73,7 @@ Plug 'junegunn/vim-peekaboo'
 " Tabs
 Plug 'gcmt/taboo.vim'
 
-Plug '~/Documents/projects/Nagelfar-Vim'
+Plug 'jessicakmcintosh/nagelfar-vim'
 
 " Tmux
 if s:darwin
@@ -102,6 +102,7 @@ Plug 'tpope/vim-projectionist'
 " Theme
 Plug 'w0ng/vim-hybrid'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'chriskempson/base16-vim'
 
 "Tcl
 Plug 'tcl.vim--smithfield', { 'for': 'tcl' }
@@ -171,7 +172,7 @@ set scrolloff=4 " Stay 4 lines from top/bottom
 if s:darwin
   set background=dark
   colorscheme tomorrow-night
-  set guifont=inconsolata:h13
+  set guifont=inconsolata:h14
 endif
 if has("gui_running")
   set background=light
