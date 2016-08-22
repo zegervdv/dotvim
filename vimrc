@@ -22,6 +22,8 @@ Plug 'tpope/vim-rsi'
 Plug 'vim-scripts/gitignore'
 Plug 'einfachtoll/didyoumean'
 
+Plug 'LStinson/TclShell-Vim'
+
 " Session Management
 Plug 'tpope/vim-obsession'
 
@@ -59,7 +61,7 @@ Plug 'tpope/vim-eunuch', { 'on' : ['Remove', 'Unlink', 'Move', 'Rename', 'Mkdir'
 
 " Syntax and checking
 if s:darwin
-  Plug 'scrooloose/syntastic'
+  " Plug 'scrooloose/syntastic'
   Plug 'xolox/vim-misc'
   Plug 'xolox/vim-easytags'
 endif
@@ -72,8 +74,6 @@ Plug 'junegunn/vim-peekaboo'
 
 " Tabs
 Plug 'gcmt/taboo.vim'
-
-Plug 'jessicakmcintosh/nagelfar-vim'
 
 " Tmux
 if s:darwin
@@ -721,14 +721,26 @@ let g:ctrlp_switch_buffer = 't'
 let Grep_Skip_Dirs = '.git .hg'
 let Grep_Skip_Files = join(split(&wildignore, ','), ' ')
 " }}}
+" DelimitMate {{{
+let delimitMate_expand_cr = 1
+let delimitMate_expand_space = 1
 " }}}
+" Nagelfar {{{
+function! Nagelfar_make()
+  silent! make!
+  call nagelfar#SetMarkers()
+endfunction
 
-augroup ft_tcl
+augroup nagelfar_tcl
   au!
-  au FileType tcl compiler nagelfar
+  au BufWrite *.tcl call Nagelfar_make()
 augroup END
-
-let g:nagelfar_file = '~/Documents/projects/nagelfar/nagelfar.tcl'
+nnoremap <leader>e :call nagelfar#EchoError()<CR>
+" }}}
+" TclShell {{{
+let g:TclShellInsert = 0
+" }}}
+" }}}
 
 
 " Load local vimrc
