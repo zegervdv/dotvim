@@ -142,11 +142,13 @@ Plug 'tpope/vim-git'
 call plug#end()
 " }}}
 
-" Activate matchit {{{
+" Activate buildin plugins {{{
 if empty(glob('~/.vim/plugin/matchit.vim'))
   silent !mkdir -p ~/.vim/plugin
   silent !cp $VIMRUNTIME/macros/matchit.vim ~/.vim/plugin
+  silent !cp $VIMRUNTIME/macros/editexisting.vim ~/.vim/plugin
 endif
+source $VIMRUNTIME/ftplugin/man.vim
 " }}}
 
 " General Settings and options {{{
