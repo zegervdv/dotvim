@@ -22,8 +22,6 @@ Plug 'tpope/vim-rsi'
 Plug 'vim-scripts/gitignore'
 Plug 'einfachtoll/didyoumean'
 
-Plug 'LStinson/TclShell-Vim'
-
 " Session Management
 Plug 'tpope/vim-obsession'
 
@@ -171,15 +169,8 @@ set title
 set scrolloff=4 " Stay 4 lines from top/bottom
 
 " Theme and style
-if s:darwin
-  set background=dark
-  colorscheme tomorrow-night
-  set guifont=inconsolata:h14
-endif
-if has("gui_running")
-  set background=light
-  colorscheme PaperColor
-endif
+set background=light
+colorscheme Base2Tone_SpaceDark
 
 set showmatch " Highlight matching brackets
 
