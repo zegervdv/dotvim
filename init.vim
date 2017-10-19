@@ -952,7 +952,6 @@ let g:indentguides_conceal_color='ctermfg=102 ctermbg=NONE guifg=Grey27 guibg=NO
 " }}}
 " }}}
 
-
 " Load local vimrc
 if filereadable($HOME . "/.vimrc.local")
   source ~/.vimrc.local
