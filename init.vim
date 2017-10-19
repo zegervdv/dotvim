@@ -44,10 +44,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rsi'
 Plug 'einfachtoll/didyoumean'
 
-" if has('nvim')
-"    Plug 'wincent/terminus'
-" endif
-
 " Session Management
 Plug 'tpope/vim-obsession'
 
@@ -63,7 +59,6 @@ Plug 'Raimondi/delimitMate'
 
 " Formatting
 Plug 'junegunn/vim-easy-align'
-" Plug 'AndrewRadev/splitjoin.vim'
 
 " Comments
 Plug 'tpope/vim-commentary'
@@ -72,11 +67,11 @@ Plug 'tpope/vim-commentary'
 Plug 'wellle/targets.vim'
 Plug 'mhinz/vim-grepper'
 
+" Indentation
+Plug 'zegervdv/vim-indentguides'
+
 " Command line
 Plug 'tpope/vim-eunuch', { 'on' : ['Remove', 'Unlink', 'Move', 'Rename', 'Mkdir', 'Chmod', 'Find', 'Locate', 'SudoEdit', 'SudoWrite']}
-
-" Syntax and checking
-Plug 'neomake/neomake'
 
 if has("nvim")
    Plug 'kassio/neoterm'
@@ -97,22 +92,12 @@ Plug 'junegunn/vim-peekaboo'
 Plug 'gcmt/taboo.vim'
 
 " Other
-Plug 'nixon/vim-vmath'
 Plug 'yuttie/comfortable-motion.vim'
 
 " Tmux
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'roxma/vim-tmux-clipboard'
-
-if has('nvim')
-   Plug 'radenling/vim-dispatch-neovim'
-   Plug 'hkupty/iron.nvim'
-endif
-
-if !has("nvim")
-   Plug 'tpope/vim-dispatch'
-endif
 
 " Completing and snippets
 if !has('nvim')
@@ -184,10 +169,20 @@ if !has('nvim')
    endif
 endif
 source $VIMRUNTIME/ftplugin/man.vim
+
+if has('packages') && !s:darwin
+   packadd! log_file
+   packadd! browsify
+   packadd! snippets
+endif
+
+if has("nvim")
+   let g:python3_host_prog="/repo/asic_fpga/work/zvandeva/Python3/bin/python3"
+   let g:python_host_prog='/project/asic_fpga/tools/vim/python/bin/python2.7'
+endif
 " }}}
 
 " General Settings and options {{{
-set nocompatible
 
 " Backspace over everything, like normal 
 set backspace=2
@@ -227,6 +222,8 @@ set showmatch " Highlight matching brackets
 
 set wrap " Wrap lines
 set wrapmargin=2 " Stay 2 chars from side
+set textwidth=79
+set colorcolumn=85
 set linebreak " Smarter wrapping
 if v:version > 703
   set breakindent " Indent wrapped lines to same level
@@ -295,7 +292,7 @@ set formatoptions+=o " Make comment when using o or O from comment line
 set formatoptions+=q " Format comments with gq
 set formatoptions+=n " Recognize numbered lists
 set formatoptions+=2 " Use indent from 2nd line of a paragraph
-set formatoptions+=l " Don't break lines that are already long
+" set formatoptions+=l " Don't break lines that are already long
 set formatoptions+=1 " Break before 1-letter words
 
 " Enable cursorline
@@ -423,8 +420,6 @@ nnoremap <C-w>y <C-w>g<C-]>
 
 nnoremap <C-s> <C-e>
 
-nnoremap + <C-a>
-
 " Move while in insert mode
 inoremap <C-f> <right>
 
@@ -432,8 +427,8 @@ inoremap <C-f> <right>
 " nnoremap <space><space> <C-^>
 
 " " Very Magic search patterns
-" nmap / /\v
-" cmap s/ s/\v
+nnoremap / /\v
+vnoremap / /\v
 
 " Keep search matches in the middle of the window.
 nnoremap n nzzzv
@@ -512,12 +507,15 @@ endfunction
 nnoremap <leader>g :call ToggleDiff()<CR>
 
 if has('nvim')
-   tnoremap <ESC> <C-\><C-n>
-   tnoremap <C-h> <c-w>h
-   tnoremap <C-j> <c-w>j
-   tnoremap <C-k> <c-w>k
-   tnoremap <C-l> <c-w>l
-
+   tnoremap <space><esc> <C-\><C-n>
+   tnoremap <C-h> <C-\><C-n><C-w>h
+   tnoremap <C-j> <C-\><C-n><C-w>j
+   tnoremap <C-k> <C-\><C-n><C-w>k
+   tnoremap <C-l> <C-\><C-n><C-w>l
+   augroup enter_term
+      au!
+      au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+   augroup END
 endif
 
 " Open buffers, tags... in vertical splits
@@ -549,6 +547,11 @@ endfunction
 
 command! -nargs=? -complete=file HGhist call s:HGhist(<q-args>)
 
+augroup focus_lost
+   au!
+   au FocusLost * :wa
+augroup END
+
 " Resize splits after window resize {{{
 augroup vim_resize
   au!
@@ -569,7 +572,6 @@ augroup diff_files
    au BufWritePost * if &diff == 1 | diffupdate | endif
 augroup END
 " }}}
-
 
 " Custom folding by Steve Losh
 function! MyFoldText() " {{{
@@ -748,6 +750,22 @@ augroup ft_text
   " au BufNewFile,BufRead,BufEnter *.txt setlocal spell spelllang=en_gb
   au BufNewFile,BufRead,BufEnter *.txt setlocal textwidth=0
 augroup END
+augroup ft_report
+   au!
+   au BufNewFile,BufRead,BufEnter *.rpt setlocal nowrap
+   au BufNewFile,BufRead,BufEnter *.rpt call ColorRpt()
+   au BufNewFile,BufRead,BufEnter *.log call ColorRpt()
+augroup END
+
+function! ColorRpt()
+   " Color numbers based on length
+   syn match String "\v<\d{1,3}>"   
+   syn match Number "\v<\d{4,6}>"   
+   syn match Statement "\v<\d{7,9}>"
+
+   " Color errors
+   syn match Error "\v^ERROR:.*$"
+endfunction
 " }}}
 " Git commit messages {{{
 augroup ft_git
@@ -859,23 +877,8 @@ vmap <Enter> <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 " }}}
-" Syntastic {{{
-let g:syntastic_check_on_open=1
-" }}}
 " Gundo tree {{{
 nnoremap <leader>u :GundoToggle<CR>
-" }}}
-" Dispatch {{{
-nnoremap <leader>m :Make<CR>
-" }}}
-" Easytags {{{
-let g:easytags_dynamic_files = 1
-let g:easytags_events = ['BufWritePost']
-let g:easytags_async = 1
-" }}}
-" FZF {{{
-" nnoremap <silent> <C-p> :call fzf#run({'sink': 'e'})<CR>
-nnoremap <C-p> :FZF --preview "cat {}" --margin 2,2<CR>
 " }}}
 " Projectionist {{{
 let g:projectionist_heuristics = {
@@ -912,35 +915,12 @@ xnoremap gs <plug>(GrepperOperator)
 
 command! -nargs=* -complete=file Ag Grepper -noprompt -tool ag -grepprg ag --vimgrep <args>
 " }}}
-" Tagbar {{{
-nnoremap <F5> :TagbarToggle<CR>
-" }}}
 " Vinegar/NetRW {{{
 autocmd FileType netrw setl bufhidden=delete
-" }}}
-" Quick-Scope {{{
-let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 " }}}
 " DelimitMate {{{
 let delimitMate_expand_cr = 1
 let delimitMate_expand_space = 1
-" }}}
-" BufExplorer {{{
-nnoremap <F1> :BufExplorer<CR>
-let g:bufExplorerDefaultHelp=0
-let g:bufExplorerDisableDefaultKeyMapping=1
-let g:bufExplorerShowNoName=1
-let g:bufExplorerShowRelativePath=1
-" }}}
-" VMath {{{
-vmap <expr> ++ VMATH_YankAndAnalyse()
-" }}}
-" Neomake {{{
-" let g:neomake_logfile='neomake.log'
-let g:neomake_vhdl_vcom_maker = {
-         \ 'args': ['-work', 'libspumante', '-lint', '-check_synthesis']
-         \ }
-let g:neomake_vhdl_enabled_makers = ['vcom']
 " }}}
 " NCM {{{
 if has('nvim')
@@ -965,6 +945,10 @@ let g:neoterm_autoinsert = 1
 if has('nvim')
    nnoremap <space><space> :silent! Ttoggle<CR>
 endif
+" }}}
+" Indentguides {{{
+let g:indentguides_spacechar = '¦'
+let g:indentguides_conceal_color='ctermfg=102'
 " }}}
 " }}}
 
