@@ -948,7 +948,7 @@ endif
 " }}}
 " Indentguides {{{
 let g:indentguides_spacechar = '¦'
-let g:indentguides_conceal_color='ctermfg=102'
+let g:indentguides_conceal_color='ctermfg=102 ctermbg=NONE guifg=Grey27 guibg=NONE'
 " }}}
 " }}}
 
