@@ -1,22 +1,22 @@
-" vim:fdm=marker
+" vim:fdm=marker:ts=2:sw=2
 
 let s:darwin = has('mac')
 
 " Include Vim-Plug {{{
 if has('nvim')
-   if empty(glob('~/.config/nvim/autoload/plug.vim'))
-     silent !mkdir -p ~/.config/nvim/autoload
-     silent !curl -fLo ~/.config/nvim/autoload/plug.vim
-       \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-     autocmd VimEnter * PlugInstall
-   endif
+  if empty(glob('~/.config/nvim/autoload/plug.vim'))
+    silent !mkdir -p ~/.config/nvim/autoload
+    silent !curl -fLo ~/.config/nvim/autoload/plug.vim
+          \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall
+  endif
 else
-   if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !mkdir -p ~/.vim/autoload
-  silent !curl -fLo ~/.vim/autoload/plug.vim
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall
-   endif
+  if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !mkdir -p ~/.vim/autoload
+    silent !curl -fLo ~/.vim/autoload/plug.vim
+          \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall
+  endif
 endif
 
 " }}}
@@ -24,20 +24,20 @@ endif
 let g:plug_window='topleft new'
 
 if has('nvim')
-   call plug#begin('~/.config/nvim/plugged')
+  call plug#begin('~/.config/nvim/plugged')
 else
-   call plug#begin('~/.vim/plugged')
+  call plug#begin('~/.vim/plugged')
 endif
 
 " General Plugins
 if !has("nvim")
-   Plug 'tpope/vim-sensible'
+  Plug 'tpope/vim-sensible'
 endif
 
 if s:darwin
-   Plug 'tpope/vim-fugitive'
-   Plug 'tpope/vim-rhubarb'
-   Plug 'vim-scripts/gitignore'
+  Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-rhubarb'
+  Plug 'vim-scripts/gitignore'
 endif
 
 Plug 'tpope/vim-repeat'
@@ -74,12 +74,12 @@ Plug 'zegervdv/vim-indentguides'
 Plug 'tpope/vim-eunuch', { 'on' : ['Remove', 'Unlink', 'Move', 'Rename', 'Mkdir', 'Chmod', 'Find', 'Locate', 'SudoEdit', 'SudoWrite']}
 
 if has("nvim")
-   Plug 'kassio/neoterm'
+  Plug 'kassio/neoterm'
 else
-   if s:darwin
-     Plug 'xolox/vim-misc'
-     Plug 'xolox/vim-easytags'
-   endif
+  if s:darwin
+    Plug 'xolox/vim-misc'
+    Plug 'xolox/vim-easytags'
+  endif
 endif
 
 " Undoing
@@ -101,9 +101,9 @@ Plug 'roxma/vim-tmux-clipboard'
 
 " Completing and snippets
 if !has('nvim')
-   Plug 'ervandew/supertab'
+  Plug 'ervandew/supertab'
 else
-   Plug 'roxma/nvim-completion-manager'
+  Plug 'roxma/nvim-completion-manager'
 endif
 Plug 'sirver/ultisnips'
 Plug 'honza/vim-snippets'
@@ -163,22 +163,22 @@ call plug#end()
 
 " Activate built in plugins {{{
 if !has('nvim')
-   if has('packages')
-     packadd! matchit
-     packadd! shellmenu
-   endif
+  if has('packages')
+    packadd! matchit
+    packadd! shellmenu
+  endif
 endif
 source $VIMRUNTIME/ftplugin/man.vim
 
 if has('packages') && !s:darwin
-   packadd! log_file
-   packadd! browsify
-   packadd! snippets
+  packadd! log_file
+  packadd! browsify
+  packadd! snippets
 endif
 
 if has("nvim")
-   let g:python3_host_prog="/repo/asic_fpga/work/zvandeva/Python3/bin/python3"
-   let g:python_host_prog='/project/asic_fpga/tools/vim/python/bin/python2.7'
+  let g:python3_host_prog="/repo/asic_fpga/work/zvandeva/Python3/bin/python3"
+  let g:python_host_prog='/project/asic_fpga/tools/vim/python/bin/python2.7'
 endif
 " }}}
 
@@ -205,7 +205,7 @@ set showcmd
 set guifont=Hack
 set background=light
 if !has("nvim")
-   set t_Co=256
+  set t_Co=256
 end
 colorscheme PaperColor
 if s:darwin
@@ -215,7 +215,7 @@ if s:darwin
 endif
 
 if has('nvim')
-   set notermguicolors
+  set notermguicolors
 endif
 
 set showmatch " Highlight matching brackets
@@ -246,7 +246,7 @@ set ignorecase " Ignore case when searching
 set smartcase " Be case sensitive if at least one uppercase char is used
 set gdefault " Default substitute all matches on a line
 if has('nvim')
-   set inccommand=nosplit
+  set inccommand=nosplit
 endif
 
 set autoindent " Automatically indent
@@ -282,7 +282,7 @@ set tags=.git/tags,tags,/project/asic_fpga/tools/vim/share/vim/vimfiles/tags
 set path+=**
 " Add PRJROOT and subdirs to path if it is set
 if exists('$PRJROOT')
-   set path+=$PRJROOT/**
+  set path+=$PRJROOT/**
 endif
 
 set formatoptions=
@@ -318,7 +318,7 @@ set virtualedit=block
 if v:version > 703
   set conceallevel=0
   if !has('nvim')
-     set cryptmethod=blowfish2
+    set cryptmethod=blowfish2
   endif
 endif
 
@@ -333,13 +333,13 @@ set undolevels=1000
 set backup
 set noswapfile
 if has('nvim')
-   " set viminfo+=n~/.config/nvim/.viminfo
-   set backupdir=~/.config/nvim/tmp/backup/,.
-   set directory=~/.config/nvim/tmp/swap//,.
+  " set viminfo+=n~/.config/nvim/.viminfo
+  set backupdir=~/.config/nvim/tmp/backup/,.
+  set directory=~/.config/nvim/tmp/swap//,.
 else
-   set viminfo+=n~/.vim/.viminfo
-   set backupdir=~/.vim/tmp/backup/,.
-   set directory=~/.vim/tmp/swap//,.
+  set viminfo+=n~/.vim/.viminfo
+  set backupdir=~/.vim/tmp/backup/,.
+  set directory=~/.vim/tmp/swap//,.
 endif
 if !isdirectory(expand(&backupdir))
   call mkdir(expand(&backupdir), "p")
@@ -349,10 +349,10 @@ if !isdirectory(expand(&directory))
 endif
 
 if v:version >= 703
-   if has('nvim')
-     set undodir=~/.config/nvim/tmp/undo//,.
-   else
-     set undodir=~/.vim/tmp/undo//,.
+  if has('nvim')
+    set undodir=~/.config/nvim/tmp/undo//,.
+  else
+    set undodir=~/.vim/tmp/undo//,.
   endif
   if !isdirectory(expand(&undodir))
     call mkdir(expand(&undodir), "p")
@@ -377,22 +377,22 @@ function! Status()
   let statusline .= "\ [%{strlen(&ft)?&ft:'unknown'}]"
   let statusline .= "%="
   if exists("b:tcl_errors")
-     let statusline .= b:tcl_errors
+    let statusline .= b:tcl_errors
   endif
   " let statusline .= "%P\ "
   if s:darwin
-     if exists('*fugitive#head')
-       let head = fugitive#head()
+    if exists('*fugitive#head')
+      let head = fugitive#head()
 
-       if empty(head) && exists('*fugitive#detect') && !exists('b:git_dir')
-         call fugitive#detect(getcwd())
-         let head = fugitive#head(5)
-       endif
-     endif
+      if empty(head) && exists('*fugitive#detect') && !exists('b:git_dir')
+        call fugitive#detect(getcwd())
+        let head = fugitive#head(5)
+      endif
+    endif
 
-     if !empty(head)
-       let statusline .=  ' on ' . head . '%* '
-     endif
+    if !empty(head)
+      let statusline .=  ' on ' . head . '%* '
+    endif
   endif
   return statusline
 endfunction
@@ -498,24 +498,24 @@ nnoremap <LEFT> :cpf<CR>
 nnoremap <leader>y :ptjump <c-r><c-w><CR>
 
 function! ToggleDiff()
-   if &diff == 1
-      windo diffoff
-   else
-      windo diffthis
-   endif
+  if &diff == 1
+    windo diffoff
+  else
+    windo diffthis
+  endif
 endfunction
 nnoremap <leader>g :call ToggleDiff()<CR>
 
 if has('nvim')
-   tnoremap <space><esc> <C-\><C-n>
-   tnoremap <C-h> <C-\><C-n><C-w>h
-   tnoremap <C-j> <C-\><C-n><C-w>j
-   tnoremap <C-k> <C-\><C-n><C-w>k
-   tnoremap <C-l> <C-\><C-n><C-w>l
-   augroup enter_term
-      au!
-      au BufEnter * if &buftype == 'terminal' | :startinsert | endif
-   augroup END
+  tnoremap <space><esc> <C-\><C-n>
+  tnoremap <C-h> <C-\><C-n><C-w>h
+  tnoremap <C-j> <C-\><C-n><C-w>j
+  tnoremap <C-k> <C-\><C-n><C-w>k
+  tnoremap <C-l> <C-\><C-n><C-w>l
+  augroup enter_term
+    au!
+    au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+  augroup END
 endif
 
 " Open buffers, tags... in vertical splits
@@ -537,19 +537,19 @@ autocmd BufReadPost *
 
 " Thg mappings
 function! s:HGhist(file)
-   if !empty(a:file)
-      let path = a:file
-   else
-      let path = expand('%')
-   endif
-   exec 'silent! !thg filelog ' . path . ' &'
+  if !empty(a:file)
+    let path = a:file
+  else
+    let path = expand('%')
+  endif
+  exec 'silent! !thg filelog ' . path . ' &'
 endfunction
 
 command! -nargs=? -complete=file HGhist call s:HGhist(<q-args>)
 
 augroup focus_lost
-   au!
-   au FocusLost * :wa
+  au!
+  au FocusLost * :wa
 augroup END
 
 " Resize splits after window resize {{{
@@ -568,8 +568,8 @@ augroup END
 
 " Reload diffs {{{
 augroup diff_files
-   au!
-   au BufWritePost * if &diff == 1 | diffupdate | endif
+  au!
+  au BufWritePost * if &diff == 1 | diffupdate | endif
 augroup END
 " }}}
 
@@ -682,11 +682,11 @@ endfunction
 "}}}
 
 augroup mark_files
-   au!
-   au BufLeave test.tcl mark T
-   au BufLeave case.do mark C
-   au BufLeave drv_*.tcl mark D
-   au BufLeave *.rtl.vhd mark R
+  au!
+  au BufLeave test.tcl mark T
+  au BufLeave case.do mark C
+  au BufLeave drv_*.tcl mark D
+  au BufLeave *.rtl.vhd mark R
 augroup END
 
 
@@ -707,9 +707,9 @@ function! ToggleList(bufname, pfx)
     endif
   endfor
   if a:pfx == 'l' && len(getloclist(0)) == 0
-      echohl ErrorMsg
-      echo "Location List is Empty."
-      return
+    echohl ErrorMsg
+    echo "Location List is Empty."
+    return
   endif
   let winnr = winnr()
   exec('botright '.a:pfx.'open')
@@ -751,20 +751,20 @@ augroup ft_text
   au BufNewFile,BufRead,BufEnter *.txt setlocal textwidth=0
 augroup END
 augroup ft_report
-   au!
-   au BufNewFile,BufRead,BufEnter *.rpt setlocal nowrap
-   au BufNewFile,BufRead,BufEnter *.rpt call ColorRpt()
-   au BufNewFile,BufRead,BufEnter *.log call ColorRpt()
+  au!
+  au BufNewFile,BufRead,BufEnter *.rpt setlocal nowrap
+  au BufNewFile,BufRead,BufEnter *.rpt call ColorRpt()
+  au BufNewFile,BufRead,BufEnter *.log call ColorRpt()
 augroup END
 
 function! ColorRpt()
-   " Color numbers based on length
-   syn match String "\v<\d{1,3}>"   
-   syn match Number "\v<\d{4,6}>"   
-   syn match Statement "\v<\d{7,9}>"
+  " Color numbers based on length
+  syn match String "\v<\d{1,3}>"   
+  syn match Number "\v<\d{4,6}>"   
+  syn match Statement "\v<\d{7,9}>"
 
-   " Color errors
-   syn match Error "\v^ERROR:.*$"
+  " Color errors
+  syn match Error "\v^ERROR:.*$"
 endfunction
 " }}}
 " Git commit messages {{{
@@ -809,13 +809,13 @@ function! SetAutoAlign()
 endfunction
 
 function! VHDLChipScopeMacro()
-      let @c = "mtyiw'Sosignal \"_cs : std_logic;'Coattribute mark_debug of \"_cs : signal is \"true\";attribute dont_touch of \"_cs : signal is \"true\";'Do\"_cs <= \";=='t"
+  let @c = "mtyiw'Sosignal \"_cs : std_logic;'Coattribute mark_debug of \"_cs : signal is \"true\";attribute dont_touch of \"_cs : signal is \"true\";'Do\"_cs <= \";=='t"
 endfunction
 
 function! VHDLColonAlign()
-   let g:easy_align_delimiters = {
-   \  ':': { 'pattern': ':', 'left_margin': 1, 'right_margin': 1, 'stick_to_left': 0}
-   \}
+  let g:easy_align_delimiters = {
+        \  ':': { 'pattern': ':', 'left_margin': 1, 'right_margin': 1, 'stick_to_left': 0}
+        \}
 endfunction
 " }}}
 " TCL {{{
@@ -847,24 +847,24 @@ augroup END
 " }}}
 " System Verilog {{{
 augroup ft_systemverilog
-   au!
-   au FileType systemverilog setlocal suffixesadd+=.sv,.v
-   au FileType systemverilog setlocal foldmethod=marker
-   au FileType systemverilog,verilog call SVAlign()
-   au FileType systemverilog,verilog let b:delimitMate_quotes = "\" '"
+  au!
+  au FileType systemverilog setlocal suffixesadd+=.sv,.v
+  au FileType systemverilog setlocal foldmethod=marker
+  au FileType systemverilog,verilog call SVAlign()
+  au FileType systemverilog,verilog let b:delimitMate_quotes = "\" '"
 augroup END
 
 function! SVAlign()
-   let g:easy_align_delimiters = {
-   \  ')': { 'pattern': '[()]', 'left_margin': 0, 'right_margin': 0, 'stick_to_left': 0}
-   \}
+  let g:easy_align_delimiters = {
+        \  ')': { 'pattern': '[()]', 'left_margin': 0, 'right_margin': 0, 'stick_to_left': 0}
+        \}
 endfunction
 " }}}
 " Make {{{
 augroup ft_make
-   autocmd!
-   autocmd BufEnter *.make setlocal filetype=make
-   autocmd FileType make setlocal noexpandtab
+  autocmd!
+  autocmd BufEnter *.make setlocal filetype=make
+  autocmd FileType make setlocal noexpandtab
 augroup END
 " }}}
 " }}}
@@ -903,11 +903,11 @@ let g:projectionist_heuristics = {
 " }}}
 " Grep {{{
 let g:grepper = {
-         \ 'tools': ['ag', 'hg'],
-         \ 'highlight': 1,
-         \ 'ag': { 
-         \  'grepprg': 'ag --path-to-agignore ~/.agignore --vimgrep',
-         \ }}
+      \ 'tools': ['ag', 'hg'],
+      \ 'highlight': 1,
+      \ 'ag': { 
+      \  'grepprg': 'ag --path-to-agignore ~/.agignore --vimgrep',
+      \ }}
 
 nnoremap gs <plug>(GrepperOperator)
 xnoremap gs <plug>(GrepperOperator)
@@ -924,9 +924,9 @@ let delimitMate_expand_space = 1
 " }}}
 " NCM {{{
 if has('nvim')
-   inoremap <expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-   inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
-   " inoremap <expr> <CR> (pumvisible() ? "\<C-y>\<CR>" : "\<CR>")
+  inoremap <expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+  inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+  " inoremap <expr> <CR> (pumvisible() ? "\<C-y>\<CR>" : "\<CR>")
 endif
 " }}}
 " Background make {{{
@@ -934,16 +934,16 @@ nnoremap <F9> :PMake<CR>
 " }}}
 " Ultisnips {{{
 if has('nvim')
-   let g:UltiSnipsExpandTrigger        = "<C-j>"
-   let g:UltiSnipsJumpForwardTrigger   = "<C-j>"
-   let g:UltiSnipsJumpBackwardTrigger  = "<C-k>"
+  let g:UltiSnipsExpandTrigger        = "<C-j>"
+  let g:UltiSnipsJumpForwardTrigger   = "<C-j>"
+  let g:UltiSnipsJumpBackwardTrigger  = "<C-k>"
 endif
 " }}}
 " Neoterm {{{
 let g:neoterm_size = '10'
 let g:neoterm_autoinsert = 1
 if has('nvim')
-   nnoremap <space><space> :silent! Ttoggle<CR>
+  nnoremap <space><space> :silent! Ttoggle<CR>
 endif
 " }}}
 " Indentguides {{{
