@@ -73,6 +73,9 @@ Plug 'zegervdv/vim-indentguides'
 " Command line
 Plug 'tpope/vim-eunuch', { 'on' : ['Remove', 'Unlink', 'Move', 'Rename', 'Mkdir', 'Chmod', 'Find', 'Locate', 'SudoEdit', 'SudoWrite']}
 
+" Mercurial
+Plug 'jlfwong/vim-mercenary'
+
 if has("nvim")
   Plug 'kassio/neoterm'
 else
@@ -104,6 +107,7 @@ if !has('nvim')
   Plug 'ervandew/supertab'
 else
   Plug 'roxma/nvim-completion-manager'
+  Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 endif
 Plug 'sirver/ultisnips'
 Plug 'honza/vim-snippets'
@@ -177,7 +181,7 @@ if has('packages') && !s:darwin
 endif
 
 if has("nvim")
-  let g:python3_host_prog="/repo/asic_fpga/work/zvandeva/Python3/bin/python3"
+  let g:python3_host_prog="/project/asic_fpga/tools/nvim/python3/bin/python3.6"
   let g:python_host_prog='/project/asic_fpga/tools/vim/python/bin/python2.7'
 endif
 " }}}

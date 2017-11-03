@@ -1,2 +1,2 @@
 
-syn region  tclComment		start="\#" skip="\\$" end="$" contains=tclTodo
+syn region  tclComment		start="\v:@<!\#" skip="\\$" end="$" contains=tclTodo
