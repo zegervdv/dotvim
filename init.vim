@@ -114,7 +114,8 @@ Plug 'honza/vim-snippets'
 
 
 " Vim file navigation
-Plug 'tpope/vim-vinegar'
+" Plug 'tpope/vim-vinegar'
+Plug 'justinmk/vim-dirvish'
 Plug 'tpope/vim-projectionist'
 
 " Theme
