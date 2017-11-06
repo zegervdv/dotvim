@@ -1,21 +1,24 @@
 " vim:fdm=marker:ts=2:sw=2
 
 let s:darwin = has('mac')
+let s:windows = has('win32')
 
 " Include Vim-Plug {{{
-if has('nvim')
-  if empty(glob('~/.config/nvim/autoload/plug.vim'))
-    silent !mkdir -p ~/.config/nvim/autoload
-    silent !curl -fLo ~/.config/nvim/autoload/plug.vim
-          \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall
-  endif
-else
-  if empty(glob('~/.vim/autoload/plug.vim'))
-    silent !mkdir -p ~/.vim/autoload
-    silent !curl -fLo ~/.vim/autoload/plug.vim
-          \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall
+if !s:windows
+  if has('nvim')
+    if empty(glob('~/.config/nvim/autoload/plug.vim'))
+      silent !mkdir -p ~/.config/nvim/autoload
+      silent !curl -fLo ~/.config/nvim/autoload/plug.vim
+            \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+      autocmd VimEnter * PlugInstall
+    endif
+  else
+    if empty(glob('~/.vim/autoload/plug.vim'))
+      silent !mkdir -p ~/.vim/autoload
+      silent !curl -fLo ~/.vim/autoload/plug.vim
+            \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+      autocmd VimEnter * PlugInstall
+    endif
   endif
 endif
 
@@ -175,7 +178,7 @@ if !has('nvim')
 endif
 source $VIMRUNTIME/ftplugin/man.vim
 
-if has('packages') && !s:darwin
+if has('packages') && (!s:darwin && !s:windows)
   packadd! log_file
   packadd! browsify
   packadd! snippets
@@ -207,7 +210,6 @@ set scrolloff=4 " Stay 4 lines from top/bottom
 set showcmd
 
 " Theme and style
-set guifont=Hack
 set background=light
 if !has("nvim")
   set t_Co=256
@@ -217,6 +219,10 @@ if s:darwin
   set background=dark
   colorscheme tomorrow-night
   set guifont=inconsolata:h13
+elseif s:windows
+  set background=light
+  colorscheme PaperColor
+  set guifont=consolas:h10
 endif
 
 if has('nvim')
@@ -308,8 +314,10 @@ augroup cline
   autocmd WinLeave * setlocal nocursorline
 augroup END
 
-set list
-set listchars=tab:»\ ,trail:·,extends:>,precedes:<,nbsp:+
+if !s:windows
+  set list
+  set listchars=tab:»\ ,trail:·,extends:>,precedes:<,nbsp:+
+endif
 
 set sessionoptions-=options
 
