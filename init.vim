@@ -71,7 +71,8 @@ Plug 'wellle/targets.vim'
 Plug 'mhinz/vim-grepper'
 
 " Indentation
-Plug 'zegervdv/vim-indentguides'
+" Plug 'zegervdv/vim-indentguides'
+Plug 'nathanaelkane/vim-indent-guides'
 
 " Command line
 Plug 'tpope/vim-eunuch', { 'on' : ['Remove', 'Unlink', 'Move', 'Rename', 'Mkdir', 'Chmod', 'Find', 'Locate', 'SudoEdit', 'SudoWrite']}
@@ -111,6 +112,7 @@ if !has('nvim')
 else
   Plug 'roxma/nvim-completion-manager'
   Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'w0rp/ale', { 'for': ['vim', 'coffee'] }
 endif
 Plug 'sirver/ultisnips'
 Plug 'honza/vim-snippets'
@@ -960,17 +962,26 @@ if has('nvim')
 endif
 " }}}
 " Indentguides {{{
-let g:indentguides_spacechar = '¦'
-let g:indentguides_conceal_color='ctermfg=102 ctermbg=NONE guifg=Grey27 guibg=NONE'
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+" }}}
+" LanguageServer {{{
+let g:LanguageClient_serverCommands = {
+  \ 'dockerfile': ['docker-langserver', 'listen'],
+  \ 'python': ['pyls'],
+  \ }
+let g:LanguageClient_autoStart = 1
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 " }}}
 " }}}
 
 " Load local vimrc
-if filereadable($HOME . "/.vimrc.local")
+if filereadable($HOME . '/.vimrc.local')
   source ~/.vimrc.local
 endif
 
 " Load project local vimrc
-if filereadable(".vimrc.local")
+if filereadable('.vimrc.local')
   source .vimrc.local
 endif
