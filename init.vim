@@ -212,6 +212,17 @@ set scrolloff=4 " Stay 4 lines from top/bottom
 set showcmd
 
 " Theme and style
+" Override needs to be defined before calling colorscheme
+function! IndentGuidesColor() abort
+  highlight IndentGuidesOdd ctermbg=254
+  highlight IndentGuidesEven ctermbg=254
+endfunction
+
+augroup IndentColors
+  autocmd!
+  autocmd ColorScheme * call IndentGuidesColor()
+augroup END
+
 set background=light
 if !has("nvim")
   set t_Co=256
@@ -969,16 +980,7 @@ let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 let g:indent_guides_auto_colors = 0
-function! IndentGuidesColor() abort
-  echom 'Loading colors'
-  highlight IndentGuidesOdd ctermbg=254
-  highlight IndentGuidesEven ctermbg=254
-endfunction
-
-augroup IndentColors
-  autocmd!
-  autocmd ColorScheme * call IndentGuidesColor()
-augroup END
+let g:indent_guides_color_change_percent = 0
 
 " }}}
 " LanguageServer {{{
