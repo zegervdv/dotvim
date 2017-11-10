@@ -415,9 +415,15 @@ set laststatus=2
 set statusline=%!Status()
 " }}}
 " Fix Colors in colorscheme {{{
-highlight SpellBad ctermbg=256 ctermfg=210
-highlight SpellLocal ctermbg=240 ctermfg=010
-highlight SpellCap ctermbg=256 ctermfg=211
+function! SpellHighlights() abort
+  highlight SpellBad ctermbg=256 ctermfg=210
+  highlight SpellLocal ctermbg=240 ctermfg=010
+  highlight SpellCap ctermbg=256 ctermfg=211
+endfunction
+augroup SpellColors
+  autocmd!
+  autocmd ColorScheme * call SpellHighlights()
+augroup END
 "}}}
 
 " Mappings {{{
@@ -482,9 +488,6 @@ endfunction
 " Swap backticks and quotes
 nnoremap ` '
 nnoremap ' `
-
-" Open url in browser
-nnoremap gb yiW:!open <C-r>*<CR><CR>
 
 " Open vimrc
 nnoremap <leader>ev :e $MYVIMRC<CR>
@@ -576,8 +579,8 @@ augroup END
 
 " Automatically reload vimrc when saving {{{
 augroup reload_vim
-  au!
-  au BufWritePost $MYVIMRC so $MYVIMRC
+  autocmd!
+  autocmd BufWritePost $MYVIMRC nested source $MYVIMRC
 augroup END
 " }}}
 
@@ -965,8 +968,18 @@ endif
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
-hi IndentGuidesOdd ctermbg=254
-hi IndentGuidesEven ctermbg=254
+let g:indent_guides_auto_colors = 0
+function! IndentGuidesColor() abort
+  echom 'Loading colors'
+  highlight IndentGuidesOdd ctermbg=254
+  highlight IndentGuidesEven ctermbg=254
+endfunction
+
+augroup IndentColors
+  autocmd!
+  autocmd ColorScheme * call IndentGuidesColor()
+augroup END
+
 " }}}
 " LanguageServer {{{
 let g:LanguageClient_serverCommands = {
