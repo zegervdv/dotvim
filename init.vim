@@ -384,32 +384,32 @@ set mouse=nic
 " Status line {{{
 function! Status()
   hi User1 guifg=#df875f guibg=NONE
-  let statusline = ''
-  let statusline .= "%n\ "
-  let statusline .= "%{expand('%:h')}/"
-  let statusline .= "%t"
-  let statusline .= "%m"
-  let statusline .= "\ [%{strlen(&ft)?&ft:'unknown'}]"
-  let statusline .= "%="
-  if exists("b:tcl_errors")
-    let statusline .= b:tcl_errors
+  let l:statusline = ''
+  let l:statusline .= '%n\ '
+  let l:statusline .= "%{expand('%:h')}/"
+  let l:statusline .= '%t'
+  let l:statusline .= '%m'
+  let l:statusline .= "\ [%{strlen(&ft)?&ft:'unknown'}]"
+  let l:statusline .= '%='
+  if exists('b:tcl_errors')
+    let l:statusline .= b:tcl_errors
   endif
   " let statusline .= "%P\ "
   if s:darwin
     if exists('*fugitive#head')
-      let head = fugitive#head()
+      let l:head = fugitive#head()
 
-      if empty(head) && exists('*fugitive#detect') && !exists('b:git_dir')
+      if empty(l:head) && exists('*fugitive#detect') && !exists('b:git_dir')
         call fugitive#detect(getcwd())
-        let head = fugitive#head(5)
+        let l:head = fugitive#head(5)
       endif
     endif
 
-    if !empty(head)
-      let statusline .=  ' on ' . head . '%* '
+    if !empty(l:head)
+      let l:statusline .=  ' on ' . l:head . '%* '
     endif
   endif
-  return statusline
+  return l:statusline
 endfunction
 set laststatus=2
 set statusline=%!Status()
