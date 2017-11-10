@@ -112,7 +112,7 @@ if !has('nvim')
 else
   Plug 'roxma/nvim-completion-manager'
   Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'w0rp/ale', { 'for': ['vim', 'coffee'] }
+  Plug 'w0rp/ale', { 'for': ['vim', 'coffee', 'yaml'] }
 endif
 Plug 'sirver/ultisnips'
 Plug 'honza/vim-snippets'
@@ -325,7 +325,7 @@ set sessionoptions-=options
 
 " Scan files for completion
 set complete=.,w,b,u,k,kspell,t,i,d
-set completeopt=menuone,longest,preview
+set completeopt=menuone,longest,preview,noinsert
 
 set splitright
 set virtualedit=block
