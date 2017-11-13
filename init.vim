@@ -110,9 +110,9 @@ Plug 'roxma/vim-tmux-clipboard'
 if !has('nvim')
   Plug 'ervandew/supertab'
 else
-  Plug 'roxma/nvim-completion-manager'
   Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
   Plug 'w0rp/ale', { 'for': ['vim', 'coffee', 'yaml'] }
+  Plug 'roxma/nvim-completion-manager'
 endif
 Plug 'sirver/ultisnips'
 Plug 'honza/vim-snippets'
@@ -895,6 +895,12 @@ augroup ft_make
   autocmd BufEnter *.make setlocal filetype=make
   autocmd FileType make setlocal noexpandtab
 augroup END
+" JSON {{{
+augroup ft_json
+  autocmd!
+  autocmd FileType json setlocal equalprg=jq
+augroup END
+" }}}
 " }}}
 " }}}
 
@@ -989,6 +995,15 @@ let g:LanguageClient_serverCommands = {
   \ 'python': ['pyls'],
   \ }
 let g:LanguageClient_autoStart = 1
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+" }}}
+" LanguageClient {{{
+let g:LanguageClient_serverCommands = {
+    \ 'vhdl': ['vhdl-tool', 'lsp']
+    \ }
+
+let g:LanguageClient_autoStart = 1
+
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 " }}}
 " }}}
