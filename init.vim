@@ -61,27 +61,23 @@ Plug 'tpope/vim-surround'
 Plug 'Raimondi/delimitMate'
 
 " Formatting
-Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/vim-easy-align', { 'on' : 'EasyAlign' }
 
 " Comments
 Plug 'tpope/vim-commentary'
 
 " Moving in files
 Plug 'wellle/targets.vim'
-Plug 'mhinz/vim-grepper'
+Plug 'mhinz/vim-grepper', { 'on' : 'Grepper' }
 
 " Indentation
-" Plug 'zegervdv/vim-indentguides'
 Plug 'nathanaelkane/vim-indent-guides'
 
 " Command line
 Plug 'tpope/vim-eunuch', { 'on' : ['Remove', 'Unlink', 'Move', 'Rename', 'Mkdir', 'Chmod', 'Find', 'Locate', 'SudoEdit', 'SudoWrite']}
 
-" Mercurial
-Plug 'jlfwong/vim-mercenary'
-
 if has("nvim")
-  Plug 'kassio/neoterm'
+  Plug 'kassio/neoterm', { 'on' : 'Ttoggle' }
 else
   if s:darwin
     Plug 'xolox/vim-misc'
@@ -124,10 +120,7 @@ Plug 'justinmk/vim-dirvish'
 Plug 'tpope/vim-projectionist'
 
 " Theme
-Plug 'w0ng/vim-hybrid'
 Plug 'NLKNguyen/papercolor-theme'
-Plug 'chriskempson/base16-vim'
-Plug 'atelierbram/base2tone-vim'
 
 "Tcl
 Plug 'vim-scripts/tcl.vim--smithfield-indent', { 'for': 'tcl'}
@@ -161,10 +154,10 @@ Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 
 
 " C
-Plug 'NLKNguyen/c-syntax.vim'
+Plug 'NLKNguyen/c-syntax.vim', { 'for': 'c'  }
 
 " Python
-Plug 'davidhalter/jedi-vim'
+Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 
 " Git
 Plug 'tpope/vim-git'
