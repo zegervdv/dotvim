@@ -989,18 +989,12 @@ let g:indent_guides_auto_colors = 0
 let g:indent_guides_color_change_percent = 0
 
 " }}}
-" LanguageServer {{{
-let g:LanguageClient_serverCommands = {
-  \ 'dockerfile': ['docker-langserver', 'listen'],
-  \ 'python': ['pyls'],
-  \ }
-let g:LanguageClient_autoStart = 1
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-" }}}
 " LanguageClient {{{
 let g:LanguageClient_serverCommands = {
-    \ 'vhdl': ['vhdl-tool', 'lsp']
-    \ }
+  \ 'vhdl': ['vhdl-tool', 'lsp'],
+  \ 'dockerfile': ['docker-langserver', 'listen'],
+  \ 'python': ['pyls']
+  \ }
 
 let g:LanguageClient_autoStart = 1
 
