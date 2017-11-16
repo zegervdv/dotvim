@@ -58,16 +58,28 @@ Plug 'sgur/vim-editorconfig'
 
 " Brackets
 Plug 'tpope/vim-surround'
-Plug 'Raimondi/delimitMate'
+Plug 'Raimondi/delimitMate', { 'on' : [] }
+augroup load_delimitmate
+  autocmd!
+  autocmd InsertEnter * call plug#load('delimitMate') | autocmd! load_delimitmate
+augroup END
 
 " Formatting
-Plug 'junegunn/vim-easy-align', { 'on' : 'EasyAlign' }
+Plug 'junegunn/vim-easy-align', { 'on' : [] }
+augroup load_easy_align
+  autocmd!
+  autocmd CursorHold,CursorHoldI * call plug#load('vim-easy-align') | autocmd! load_easy_align
+augroup END
 
 " Comments
 Plug 'tpope/vim-commentary'
 
 " Moving in files
-Plug 'wellle/targets.vim'
+Plug 'wellle/targets.vim', { 'on': [] }
+augroup load_targets
+  autocmd!
+  autocmd InsertEnter * call plug#load('targets.vim') | autocmd! load_targets
+augroup END
 Plug 'mhinz/vim-grepper', { 'on' : 'Grepper' }
 
 " Indentation
@@ -100,7 +112,7 @@ Plug 'yuttie/comfortable-motion.vim'
 " Tmux
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tmux-plugins/vim-tmux-focus-events'
-Plug 'roxma/vim-tmux-clipboard'
+" Plug 'roxma/vim-tmux-clipboard'
 
 " Completing and snippets
 if !has('nvim')
@@ -110,8 +122,13 @@ else
   Plug 'w0rp/ale', { 'for': ['vim', 'coffee', 'yaml'] }
   Plug 'roxma/nvim-completion-manager'
 endif
-Plug 'sirver/ultisnips'
-Plug 'honza/vim-snippets'
+Plug 'sirver/ultisnips', { 'on': [] }
+Plug 'honza/vim-snippets', { 'on': [] }
+augroup load_ultisnips
+   autocmd!
+   autocmd InsertEnter * call plug#load('ultisnips') | autocmd! load_ultisnips
+   autocmd InsertEnter * call plug#load('vim-snippets') | autocmd! load_ultisnips
+augroup END
 
 
 " Vim file navigation
@@ -240,7 +257,7 @@ set showmatch " Highlight matching brackets
 set wrap " Wrap lines
 set wrapmargin=2 " Stay 2 chars from side
 set textwidth=79
-set colorcolumn=85
+set colorcolumn=81
 set linebreak " Smarter wrapping
 if v:version > 703
   set breakindent " Indent wrapped lines to same level
