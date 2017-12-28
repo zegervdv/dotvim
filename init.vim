@@ -190,7 +190,7 @@ if !has('nvim')
 endif
 source $VIMRUNTIME/ftplugin/man.vim
 
-if has('packages') && (!s:darwin && !s:windows)
+if has('packages') && (!s:darwin && !s:windows) && !exists('$NVIM_NOPACK')
   packadd! log_file
   packadd! browsify
   packadd! snippets
