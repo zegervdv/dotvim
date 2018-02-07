@@ -122,13 +122,8 @@ else
   Plug 'w0rp/ale', { 'for': ['vim', 'coffee', 'yaml'] }
   Plug 'roxma/nvim-completion-manager'
 endif
-Plug 'sirver/ultisnips', { 'on': [] }
-Plug 'honza/vim-snippets', { 'on': [] }
-augroup load_ultisnips
-   autocmd!
-   autocmd InsertEnter * call plug#load('ultisnips') | autocmd! load_ultisnips
-   autocmd InsertEnter * call plug#load('vim-snippets') | autocmd! load_ultisnips
-augroup END
+Plug 'sirver/ultisnips'
+Plug 'honza/vim-snippets'
 
 
 " Vim file navigation
@@ -1011,6 +1006,19 @@ let g:LanguageClient_autoStart = 1
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 " }}}
 " }}}
+
+let g:clipboard = {
+      \   'name': 'TMUX',
+      \   'copy': {
+      \      '+': 'tmux load-buffer -',
+      \      '*': 'tmux load-buffer -',
+      \    },
+      \   'paste': {
+      \      '+': 'tmux save-buffer -',
+      \      '*': 'tmux save-buffer -',
+      \   },
+      \   'cache_enabled': 1,
+      \ }
 
 " Load local vimrc
 if filereadable($HOME . '/.vimrc.local')
