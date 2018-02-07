@@ -38,10 +38,10 @@ if !has("nvim")
 endif
 
 if s:darwin
-  Plug 'tpope/vim-fugitive'
-  Plug 'tpope/vim-rhubarb'
   Plug 'vim-scripts/gitignore'
 endif
+
+Plug 'sjl/splice.vim'
 
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rsi'
@@ -1004,6 +1004,15 @@ let g:LanguageClient_serverCommands = {
 let g:LanguageClient_autoStart = 1
 
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+" }}}
+" Splice {{{
+let g:splice_initial_diff_grid=1
+let g:splice_initial_diff_compare=1
+let g:splice_initial_diff_path=0
+let g:splice_initial_scrollbind_grid=1
+let g:splice_initial_scrollbind_compare=1
+let g:splice_initial_scrollbind_path=1
+let g:splice_wrap="nowrap"
 " }}}
 " }}}
 
