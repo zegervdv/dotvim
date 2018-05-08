@@ -521,6 +521,18 @@ endfunction
 " Do not move on *
 nnoremap <silent> * :let stay_star_view = winsaveview()<cr>*:call winrestview(stay_star_view)<cr>
 
+" Search for selected text, forwards or backwards.
+vnoremap <silent> * :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy/<C-R><C-R>=substitute(
+  \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gV:call setreg('"', old_reg, old_regtype)<CR>
+vnoremap <silent> # :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy?<C-R><C-R>=substitute(
+  \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gV:call setreg('"', old_reg, old_regtype)<CR>
+
 " nnoremap <F10> :botright copen<CR>
 
 " Error navigation
@@ -996,7 +1008,6 @@ let g:indent_guides_color_change_percent = 0
 " }}}
 " LanguageClient {{{
 let g:LanguageClient_serverCommands = {
-  \ 'vhdl': ['vhdl-tool', 'lsp'],
   \ 'dockerfile': ['docker-langserver', 'listen'],
   \ 'python': ['pyls']
   \ }
