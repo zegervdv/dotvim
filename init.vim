@@ -267,6 +267,8 @@ else
   set tabstop=3 shiftwidth=3
 endif
 
+set shiftround " Round shift indents to nearest value
+
 " Searching
 set magic  " Use magic regexes
 set hlsearch " Highlight all matches
@@ -298,7 +300,7 @@ set guioptions+=c
 
 set history=100 " Set history 100
 set wildmenu " Command completion
-set wildmode=full " Complete to fullest match
+set wildmode=longest:full,full " Complete to fullest match
 set ttyfast " Use a fast terminal
 set lazyredraw " No need to redraw constantly
 
@@ -535,6 +537,8 @@ vnoremap <silent> # :<C-U>
 
 " nnoremap <F10> :botright copen<CR>
 
+xnoremap p pgvy
+
 " Error navigation
 nnoremap <UP> :cprev<CR>
 nnoremap <DOWN> :cnext<CR>
@@ -636,6 +640,7 @@ function! MyFoldText() " {{{
   return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
 endfunction " }}}
 set foldtext=MyFoldText()
+set foldopen+=jump
 
 " Detect Filetype from content if file has no extension {{{
 augroup newFileDetection
@@ -846,8 +851,6 @@ let g:vhdl_indent_rhassign = 1
 augroup ft_vhdl
   au!
   autocmd FileType vhdl call VHDLColonAlign()
-  autocmd FileType vhdl setlocal commentstring=--\ %s
-  autocmd FileType vhdl call VHDLChipScopeMacro()
 augroup END
 
 function! SetAutoAlign()
