@@ -7,6 +7,7 @@ Abolish  {heig}th                           {}ht
 Abolish  por{ject,gram}                     pro{}
 Abolish  {,as,de,re}sing{,s,ed}             {}sign{}
 Abolish  {std_,}loigc{,_vector}             {}logic{}
+Abolish  emtpy                              empty
 
 
 " Code typos

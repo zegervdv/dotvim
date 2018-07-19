@@ -88,9 +88,7 @@ Plug 'nathanaelkane/vim-indent-guides'
 " Command line
 Plug 'tpope/vim-eunuch', { 'on' : ['Remove', 'Unlink', 'Move', 'Rename', 'Mkdir', 'Chmod', 'Find', 'Locate', 'SudoEdit', 'SudoWrite']}
 
-if has("nvim")
-  Plug 'kassio/neoterm', { 'on' : 'Ttoggle' }
-else
+if !has("nvim")
   if s:darwin
     Plug 'xolox/vim-misc'
     Plug 'xolox/vim-easytags'
@@ -120,7 +118,13 @@ if !has('nvim')
 else
   Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
   Plug 'w0rp/ale', { 'for': ['vim', 'coffee', 'yaml'] }
-  Plug 'roxma/nvim-completion-manager'
+  Plug 'ncm2/ncm2'
+  Plug 'roxma/nvim-yarp'
+  Plug 'ncm2/ncm2-tmux'
+  Plug 'ncm2/ncm2-path'
+  Plug 'ncm2/ncm2-bufword'
+  Plug 'ncm2/ncm2-jedi'
+  Plug 'ncm2/ncm2-ultisnips'
 endif
 Plug 'sirver/ultisnips'
 Plug 'honza/vim-snippets'
@@ -136,6 +140,9 @@ Plug 'NLKNguyen/papercolor-theme'
 
 "Tcl
 Plug 'vim-scripts/tcl.vim--smithfield-indent', { 'for': 'tcl'}
+
+" Debugging
+Plug 'sakhnik/nvim-gdb', { 'on': ['GdbStart'] }
 
 if s:darwin
   " Ruby
@@ -189,11 +196,12 @@ if has('packages') && (!s:darwin && !s:windows) && !exists('$NVIM_NOPACK')
   packadd! log_file
   packadd! browsify
   packadd! snippets
+  packadd! chipscoper
 endif
 
 if has("nvim")
-  let g:python3_host_prog="/project/asic_fpga/tools/nvim/python3/bin/python3.6"
-  let g:python_host_prog='/project/asic_fpga/tools/vim/python/bin/python2.7'
+  let g:python3_host_prog="/home/zvandeva/.config/virtualenvs/python3/bin/python"
+  let g:python_host_prog='/home/zvandeva/.config/virtualenvs/python2/bin/python'
 endif
 " }}}
 
@@ -228,10 +236,27 @@ augroup IndentColors
   autocmd ColorScheme * call IndentGuidesColor()
 augroup END
 
-set background=light
+function! ColorOverrides() abort
+  highlight Special ctermfg=31
+endfunction
+
+augroup ColorOverrides
+  autocmd!
+  autocmd ColorScheme * call ColorOverrides()
+augroup END
+
+
 if !has("nvim")
   set t_Co=256
 end
+let g:PaperColor_Theme_Options = {
+      \ 'theme': {
+      \   'default': {
+      \     'allow_bold': 0
+      \   }
+      \ }
+      \}
+set background=light
 colorscheme PaperColor
 if s:darwin
   set background=dark
@@ -303,6 +328,7 @@ set wildmenu " Command completion
 set wildmode=longest:full,full " Complete to fullest match
 set ttyfast " Use a fast terminal
 set lazyredraw " No need to redraw constantly
+set shortmess+=c
 
 set ttimeoutlen=-1 " Set the timeout to a minimum
 set diffopt+=iwhite " Ignore spaces in diffs"
@@ -343,7 +369,8 @@ set sessionoptions-=options
 
 " Scan files for completion
 set complete=.,w,b,u,k,kspell,t,i,d
-set completeopt=menuone,longest,preview,noinsert
+" set completeopt=menuone,longest,preview,noinsert,noselect
+set completeopt=noinsert,menuone,noselect
 
 set splitright
 set virtualedit=block
@@ -599,7 +626,7 @@ command! -nargs=? -complete=file HGhist call s:HGhist(<q-args>)
 
 augroup focus_lost
   au!
-  au FocusLost * :wa
+  au FocusLost * if !&readonly | :wa | endif
 augroup END
 
 " Resize splits after window resize {{{
@@ -874,7 +901,9 @@ augroup ft_tcl
   autocmd FileType tcl setlocal commentstring=#\ %s
   " autocmd FileType tcl compiler nagelfar
   autocmd BufRead *.do set filetype=tcl
+  autocmd BufRead *.hal set filetype=tcl
   autocmd FileType tcl setlocal iskeyword+=:
+  autocmd FileType tcl setlocal breakat-=:
   autocmd FileType tcl setlocal suffixesadd+=.tcl,.do
 augroup END
 " shortcuts
@@ -921,6 +950,12 @@ augroup ft_json
   autocmd FileType json setlocal equalprg=jq
 augroup END
 " }}}
+" }}}
+" Python {{{
+augroup f_python
+  autocmd!
+  autocmd FileType python setlocal shiftwidth=4
+augroup END
 " }}}
 " }}}
 
@@ -978,11 +1013,10 @@ let delimitMate_expand_cr = 1
 let delimitMate_expand_space = 1
 " }}}
 " NCM {{{
-if has('nvim')
-  inoremap <expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-  inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
-  " inoremap <expr> <CR> (pumvisible() ? "\<C-y>\<CR>" : "\<CR>")
-endif
+" Use <TAB> to select the popup menu:
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+autocmd BufEnter * call ncm2#enable_for_buffer()
 " }}}
 " Background make {{{
 nnoremap <F9> :PMake<CR>
@@ -994,12 +1028,6 @@ if has('nvim')
   let g:UltiSnipsJumpBackwardTrigger  = "<C-k>"
 endif
 " }}}
-" Neoterm {{{
-let g:neoterm_size = '10'
-let g:neoterm_autoinsert = 1
-if has('nvim')
-  nnoremap <space><space> :silent! Ttoggle<CR>
-endif
 " }}}
 " Indentguides {{{
 let g:indent_guides_enable_on_vim_startup = 1
@@ -1027,6 +1055,13 @@ let g:splice_initial_scrollbind_grid=1
 let g:splice_initial_scrollbind_compare=1
 let g:splice_initial_scrollbind_path=1
 let g:splice_wrap="nowrap"
+" }}}
+" Chipscoper {{{
+nnoremap <leader>cm :call ChipScoperMark()<CR>
+nnoremap <leader>ci :call ChipScoperInsert()<CR>
+" }}}
+" GDB {{{
+let  g:nvimgdb_disable_start_keymaps = 1
 " }}}
 " }}}
 
