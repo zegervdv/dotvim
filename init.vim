@@ -117,7 +117,7 @@ if !has('nvim')
   Plug 'ervandew/supertab'
 else
   Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'w0rp/ale', { 'for': ['vim', 'coffee', 'yaml'] }
+  Plug 'w0rp/ale', { 'for': ['vim', 'coffee', 'yaml', 'python'] }
   Plug 'ncm2/ncm2'
   Plug 'roxma/nvim-yarp'
   Plug 'ncm2/ncm2-tmux'
@@ -955,6 +955,7 @@ augroup END
 augroup f_python
   autocmd!
   autocmd FileType python setlocal shiftwidth=4
+  au FileType python setlocal formatprg=autopep8\ -
 augroup END
 " }}}
 " }}}
@@ -1059,6 +1060,12 @@ let g:splice_wrap="nowrap"
 " Chipscoper {{{
 nnoremap <leader>cm :call ChipScoperMark()<CR>
 nnoremap <leader>ci :call ChipScoperInsert()<CR>
+nnoremap <leader>cd :call ChipScoperUnMark()<CR>
+augroup cs_vhdl
+  autocmd!
+  autocmd FileType vhdl packadd chipscoper
+  autocmd FileType vhdl call ChipScoperSetup()
+augroup END
 " }}}
 " GDB {{{
 let  g:nvimgdb_disable_start_keymaps = 1
