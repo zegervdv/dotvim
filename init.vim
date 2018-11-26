@@ -117,7 +117,6 @@ if !has('nvim')
   Plug 'ervandew/supertab'
 else
   Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'w0rp/ale', { 'for': ['vim', 'coffee', 'yaml', 'python'] }
   Plug 'ncm2/ncm2'
   Plug 'roxma/nvim-yarp'
   Plug 'ncm2/ncm2-tmux'
@@ -1018,12 +1017,14 @@ let delimitMate_expand_space = 1
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 autocmd BufEnter * call ncm2#enable_for_buffer()
+inoremap <expr> <CR> (pumvisible() ? "\<C-y>\<CR>" : "\<CR>")
 " }}}
 " Background make {{{
 nnoremap <F9> :PMake<CR>
 " }}}
 " Ultisnips {{{
 if has('nvim')
+  inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
   let g:UltiSnipsExpandTrigger        = "<C-j>"
   let g:UltiSnipsJumpForwardTrigger   = "<C-j>"
   let g:UltiSnipsJumpBackwardTrigger  = "<C-k>"
@@ -1041,7 +1042,8 @@ let g:indent_guides_color_change_percent = 0
 " LanguageClient {{{
 let g:LanguageClient_serverCommands = {
   \ 'dockerfile': ['docker-langserver', 'listen'],
-  \ 'python': ['pyls']
+  \ 'python': ['pyls'],
+  \ 'vhdl': ['~/Public/vhdl_ls']
   \ }
 
 let g:LanguageClient_autoStart = 1
