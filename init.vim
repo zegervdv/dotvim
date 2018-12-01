@@ -176,6 +176,7 @@ Plug 'NLKNguyen/c-syntax.vim', { 'for': 'c'  }
 
 " Python
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
+Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
 
 " Git
 Plug 'tpope/vim-git'
