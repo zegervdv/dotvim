@@ -1091,6 +1091,7 @@ let g:LanguageClient_serverCommands = {
   \ }
 
 let g:LanguageClient_autoStart = 1
+let g:LanguageClient_diagnosticsList = "Location"
 
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 " }}}
