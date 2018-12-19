@@ -106,6 +106,7 @@ Plug 'gcmt/taboo.vim'
 
 " Other
 Plug 'yuttie/comfortable-motion.vim'
+Plug 'tpope/vim-apathy'
 
 " Tmux
 Plug 'christoomey/vim-tmux-navigator'
