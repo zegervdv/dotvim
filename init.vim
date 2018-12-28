@@ -431,30 +431,12 @@ set mouse=nic
 function! Status()
   hi User1 guifg=#df875f guibg=NONE
   let l:statusline = ''
-  let l:statusline .= '%n\ '
+  let l:statusline .= '%n '
   let l:statusline .= "%{expand('%:h')}/"
   let l:statusline .= '%t'
   let l:statusline .= '%m'
   let l:statusline .= "\ [%{strlen(&ft)?&ft:'unknown'}]"
   let l:statusline .= '%='
-  if exists('b:tcl_errors')
-    let l:statusline .= b:tcl_errors
-  endif
-  " let statusline .= "%P\ "
-  if s:darwin
-    if exists('*fugitive#head')
-      let l:head = fugitive#head()
-
-      if empty(l:head) && exists('*fugitive#detect') && !exists('b:git_dir')
-        call fugitive#detect(getcwd())
-        let l:head = fugitive#head(5)
-      endif
-    endif
-
-    if !empty(l:head)
-      let l:statusline .=  ' on ' . l:head . '%* '
-    endif
-  endif
   return l:statusline
 endfunction
 set laststatus=2
@@ -565,7 +547,7 @@ vnoremap <silent> # :<C-U>
 
 " nnoremap <F10> :botright copen<CR>
 
-xnoremap p pgvy
+xnoremap <silent> p p:if v:register == '"'<Bar>let @@=@0<Bar>endif<CR>
 
 " Error navigation
 nnoremap <UP> :cprev<CR>
