@@ -224,26 +224,26 @@ set title
 set scrolloff=4 " Stay 4 lines from top/bottom
 set showcmd
 
-" Theme and style
-" Override needs to be defined before calling colorscheme
-function! IndentGuidesColor() abort
-  highlight IndentGuidesOdd ctermbg=254
-  highlight IndentGuidesEven ctermbg=254
-endfunction
+" " Theme and style
+" " Override needs to be defined before calling colorscheme
+" function! IndentGuidesColor() abort
+"   highlight IndentGuidesOdd ctermbg=254
+"   highlight IndentGuidesEven ctermbg=254
+" endfunction
 
-augroup IndentColors
-  autocmd!
-  autocmd ColorScheme * call IndentGuidesColor()
-augroup END
+" augroup IndentColors
+"   autocmd!
+"   autocmd ColorScheme * call IndentGuidesColor()
+" augroup END
 
-function! ColorOverrides() abort
-  highlight Special ctermfg=31
-endfunction
+" function! ColorOverrides() abort
+"   highlight Special ctermfg=31
+" endfunction
 
-augroup ColorOverrides
-  autocmd!
-  autocmd ColorScheme * call ColorOverrides()
-augroup END
+" augroup ColorOverrides
+"   autocmd!
+"   autocmd ColorScheme * call ColorOverrides()
+" augroup END
 
 
 if !has("nvim")
