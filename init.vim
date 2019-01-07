@@ -141,6 +141,9 @@ Plug 'NLKNguyen/papercolor-theme'
 "Tcl
 Plug 'vim-scripts/tcl.vim--smithfield-indent', { 'for': 'tcl'}
 
+" Python
+Plug 'w0rp/ale', { 'for': 'python' }
+
 " Debugging
 Plug 'sakhnik/nvim-gdb', { 'on': ['GdbStart'] }
 
