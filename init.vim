@@ -58,11 +58,7 @@ Plug 'sgur/vim-editorconfig'
 
 " Brackets
 Plug 'tpope/vim-surround'
-Plug 'Raimondi/delimitMate', { 'on' : [] }
-augroup load_delimitmate
-  autocmd!
-  autocmd InsertEnter * call plug#load('delimitMate') | autocmd! load_delimitmate
-augroup END
+Plug 'tmsvg/pear-tree'
 
 " Formatting
 Plug 'junegunn/vim-easy-align', { 'on' : [] }
