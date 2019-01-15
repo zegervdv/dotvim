@@ -1168,9 +1168,10 @@ command! -nargs=* -complete=file Ag Grepper -noprompt -tool ag -grepprg ag --vim
 " Vinegar/NetRW {{{
 autocmd FileType netrw setl bufhidden=delete
 " }}}
-" DelimitMate {{{
-let delimitMate_expand_cr = 1
-let delimitMate_expand_space = 1
+" Pear Tree {{{
+let g:pear_tree_smart_openers = 1
+let g:pear_tree_smart_closers = 1
+let g:pear_tree_smart_backspace = 1
 " }}}
 " NCM {{{
 " Use <TAB> to select the popup menu:
