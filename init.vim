@@ -110,6 +110,9 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 " Plug 'roxma/vim-tmux-clipboard'
 
+" Background make
+Plug 'skywind3000/asyncrun.vim'
+
 " Completing and snippets
 if !has('nvim')
   Plug 'ervandew/supertab'
@@ -1264,6 +1267,9 @@ let g:which_key_map.c= {
   \}
 
 call which_key#register('<Space>', "g:which_key_map")
+" }}}
+" AsyncRun {{{
+let g:asyncrun_open = 8
 " }}}
 " }}}
 
