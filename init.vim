@@ -103,6 +103,7 @@ Plug 'gcmt/taboo.vim'
 " Other
 Plug 'yuttie/comfortable-motion.vim'
 Plug 'tpope/vim-apathy'
+Plug 'liuchengxu/vim-which-key'
 
 " Tmux
 Plug 'christoomey/vim-tmux-navigator'
@@ -517,8 +518,8 @@ nnoremap ` '
 nnoremap ' `
 
 " Open vimrc
-nnoremap <leader>ev :e $MYVIMRC<CR>
-nnoremap <leader>sv :so $MYVIMRC<CR>
+nnoremap <leader>ve :e $MYVIMRC<CR>
+nnoremap <leader>vs :so $MYVIMRC<CR>
 
 " Open dup in diffmode
 nnoremap <leader>d :call OpenDup(@%)<CR>
@@ -961,7 +962,6 @@ onoremap <silent> ai :<c-u>call <sid>aroundIndentation()<cr>
 " Filetype specific settings {{{
 " Latex {{{
 " Open pdf
-nnoremap <leader>v :!open -a /Applications/TeX/TeXShop.app %:r.pdf<CR><CR>
 
 function! Latexprog()
   if !filereadable("./Makefile")
@@ -974,7 +974,6 @@ augroup latex
   autocmd FileType tex call Latexprog()
   au BufNewFile,BufRead,BufEnter *.tex setlocal spell spelllang=en_gb
   au BufNewFile,BufRead,BufEnter *.tex setlocal textwidth=0
-  nnoremap <leader>ml :Dispatch latexmk -pdf %<CR>
 augroup END
 " }}}
 " Markdown {{{
@@ -1233,6 +1232,38 @@ augroup END
 " }}}
 " GDB {{{
 let  g:nvimgdb_disable_start_keymaps = 1
+" }}}
+" Which Key {{{
+let g:mapleader = "\<Space>"
+let g:maplocalleader = '\\'
+nnoremap <silent> <leader> :<C-u>WhichKey '<Space>'<CR>
+nnoremap <silent> <localleader> :<C-u>WhichKey ','<CR>
+
+let g:which_key_map = {}
+let g:which_key_map.d = 'open-dup'
+let g:which_key_map.g = 'toggle-diff'
+let g:which_key_map.b = 'split-buffer'
+let g:which_key_map.f = 'split-find'
+let g:which_key_map.t = 'split-tag'
+let g:which_key_map.y = 'preview-tag'
+let g:which_key_map.l = 'clear-highlight'
+let g:which_key_map.u = 'gundo-toggle'
+let g:which_key_map.i = { 'name': '+indent-guides' }
+let g:which_key_map.r = { 'name': 'which_key_ignore' }
+let g:which_key_map.s = { 'name': 'which_key_ignore' }
+let g:which_key_map.v = {
+  \ 'name': '+vimrc',
+  \ 'e': 'edit',
+  \ 's': 'source'
+  \}
+let g:which_key_map.c= {
+  \ 'name': '+chipscope',
+  \ 'm': 'mark-debug',
+  \ 'i': 'insert-debug-statements',
+  \ 'd': 'unmark-debug'
+  \}
+
+call which_key#register('<Space>', "g:which_key_map")
 " }}}
 " }}}
 
