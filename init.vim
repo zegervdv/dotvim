@@ -116,7 +116,7 @@ Plug 'skywind3000/asyncrun.vim'
 if !has('nvim')
   Plug 'ervandew/supertab'
 else
-  Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
   Plug 'ncm2/ncm2'
   Plug 'roxma/nvim-yarp'
   Plug 'ncm2/ncm2-tmux'
@@ -1205,7 +1205,8 @@ let g:indent_guides_color_change_percent = 0
 let g:LanguageClient_serverCommands = {
   \ 'dockerfile': ['docker-langserver', 'listen'],
   \ 'python': ['pyls'],
-  \ 'vhdl': ['~/Public/vhdl_ls']
+  \ 'vhdl': ['~/Public/vhdl_ls'],
+  \ 'cpp': ['clangd']
   \ }
 
 let g:LanguageClient_autoStart = 1
