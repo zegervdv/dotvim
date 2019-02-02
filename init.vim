@@ -58,7 +58,7 @@ Plug 'sgur/vim-editorconfig'
 
 " Brackets
 Plug 'tpope/vim-surround'
-Plug 'tmsvg/pear-tree'
+Plug 'raimondi/delimitMate'
 
 " Formatting
 Plug 'junegunn/vim-easy-align', { 'on' : [] }
@@ -1169,24 +1169,19 @@ command! -nargs=* -complete=file Ag Grepper -noprompt -tool ag -grepprg ag --vim
 " Vinegar/NetRW {{{
 autocmd FileType netrw setl bufhidden=delete
 " }}}
-" Pear Tree {{{
-let g:pear_tree_smart_openers = 1
-let g:pear_tree_smart_closers = 1
-let g:pear_tree_smart_backspace = 1
-" }}}
 " NCM {{{
 " Use <TAB> to select the popup menu:
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 autocmd BufEnter * call ncm2#enable_for_buffer()
-inoremap <expr> <CR> (pumvisible() ? "\<C-y>\<CR>" : "\<CR>")
+inoremap <expr> <CR> pumvisible() ? "\<C-y>\<CR>" : delimitMate#ExpandReturn()
 " }}}
 " Background make {{{
 nnoremap <F9> :PMake<CR>
 " }}}
 " Ultisnips {{{
 if has('nvim')
-  inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
+  inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or(delimitMate#ExpandReturn(), 'n')
   let g:UltiSnipsExpandTrigger        = "<C-j>"
   let g:UltiSnipsJumpForwardTrigger   = "<C-j>"
   let g:UltiSnipsJumpBackwardTrigger  = "<C-k>"
@@ -1222,6 +1217,10 @@ let g:splice_initial_scrollbind_grid=1
 let g:splice_initial_scrollbind_compare=1
 let g:splice_initial_scrollbind_path=1
 let g:splice_wrap="nowrap"
+" }}}
+" DelimitMate {{{
+let delimitMate_expand_cr=1
+let delimitMate_expand_space=1
 " }}}
 " Chipscoper {{{
 nnoremap <leader>cm :call ChipScoperMark()<CR>
