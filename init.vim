@@ -144,7 +144,7 @@ Plug 'vim-scripts/tcl.vim--smithfield-indent', { 'for': 'tcl'}
 Plug 'w0rp/ale', { 'for': 'python' }
 
 " Debugging
-Plug 'sakhnik/nvim-gdb', { 'on': ['GdbStart'] }
+Plug 'sakhnik/nvim-gdb', { 'do': './install.sh' }
 
 if s:darwin
   " Ruby
