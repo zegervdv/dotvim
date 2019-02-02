@@ -103,7 +103,6 @@ Plug 'gcmt/taboo.vim'
 " Other
 Plug 'yuttie/comfortable-motion.vim'
 Plug 'tpope/vim-apathy'
-Plug 'liuchengxu/vim-which-key'
 
 " Tmux
 Plug 'christoomey/vim-tmux-navigator'
@@ -1235,38 +1234,6 @@ augroup END
 " }}}
 " GDB {{{
 let  g:nvimgdb_disable_start_keymaps = 1
-" }}}
-" Which Key {{{
-let g:mapleader = "\<Space>"
-let g:maplocalleader = '\\'
-nnoremap <silent> <leader> :<C-u>WhichKey '<Space>'<CR>
-nnoremap <silent> <localleader> :<C-u>WhichKey ','<CR>
-
-let g:which_key_map = {}
-let g:which_key_map.d = ['call OpenDup(@%)', 'open-dup']
-let g:which_key_map.g = ['call ToggleDiff()', 'toggle-diff']
-let g:which_key_map.b = ['vert sbuffer ', 'split-buffer']
-let g:which_key_map.f = ['vert sfind ', 'split-find']
-let g:which_key_map.t = ['vert stjump ', 'split-tag']
-let g:which_key_map.y = ['ptjump <C-r><C-w>', 'preview-tag']
-let g:which_key_map.l = ['noh', 'clear-highlight']
-let g:which_key_map.u = ['GundoToggle', 'gundo-toggle']
-let g:which_key_map.i = { 'name': '+indent-guides' }
-let g:which_key_map.r = { 'name': 'which_key_ignore' }
-let g:which_key_map.s = { 'name': 'which_key_ignore' }
-let g:which_key_map.v = {
-  \ 'name': '+vimrc',
-  \ 'e': ['edit $MYVIMRC', 'edit'],
-  \ 's': ['source $MYVIMRC', 'source']
-  \}
-let g:which_key_map.c= {
-  \ 'name': '+chipscope',
-  \ 'm': ['call ChipScoperMark()', 'mark-debug'],
-  \ 'i': ['call ChipScoperInsert()', 'insert-debug-statements'],
-  \ 'd': ['call ChipScoperUnMark()', 'unmark-debug']
-  \}
-
-call which_key#register('<Space>', "g:which_key_map")
 " }}}
 " AsyncRun {{{
 let g:asyncrun_open = 8
