@@ -204,8 +204,8 @@ if has('packages') && (!s:darwin && !s:windows) && !exists('$NVIM_NOPACK')
 endif
 
 if has("nvim")
-  let g:python3_host_prog="/home/zvandeva/.config/virtualenvs/python3/bin/python"
-  let g:python_host_prog='/home/zvandeva/.config/virtualenvs/python2/bin/python'
+  let g:python3_host_prog=expand('$HOME/.config/virtualenvs/python3/bin/python')
+  let g:python_host_prog=expand('$HOME/.config/virtualenvs/python2/bin/python')
 endif
 " }}}
 
