@@ -124,6 +124,7 @@ else
   Plug 'ncm2/ncm2-bufword'
   Plug 'ncm2/ncm2-jedi'
   Plug 'ncm2/ncm2-ultisnips'
+  Plug 'ncm2/float-preview.nvim'
 endif
 Plug 'sirver/ultisnips'
 Plug 'honza/vim-snippets'
@@ -373,7 +374,7 @@ set sessionoptions-=options
 " Scan files for completion
 set complete=.,w,b,u,k,kspell,t,i,d
 " set completeopt=menuone,longest,preview,noinsert,noselect
-set completeopt=noinsert,menuone,noselect
+set completeopt=noinsert,menuone,noselect,preview
 
 set splitright
 set virtualedit=block
@@ -1201,13 +1202,16 @@ let g:LanguageClient_serverCommands = {
   \ 'dockerfile': ['docker-langserver', 'listen'],
   \ 'python': ['pyls'],
   \ 'vhdl': ['~/Public/vhdl_ls'],
-  \ 'cpp': ['clangd']
+  \ 'cpp': ['clangd'],
+  \ 'c': ['clangd']
   \ }
 
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_diagnosticsList = "Location"
+let g:LanguageClient_selectionUI = "quickfix"
 
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
 " }}}
 " Splice {{{
 let g:splice_initial_diff_grid=1
