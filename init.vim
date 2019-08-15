@@ -134,6 +134,8 @@ Plug 'honza/vim-snippets'
 " Plug 'tpope/vim-vinegar'
 Plug 'justinmk/vim-dirvish'
 Plug 'tpope/vim-projectionist'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+Plug 'junegunn/fzf.vim'
 
 " Theme
 Plug 'NLKNguyen/papercolor-theme'
@@ -1242,6 +1244,10 @@ let  g:nvimgdb_disable_start_keymaps = 1
 " AsyncRun {{{
 let g:asyncrun_open = 8
 " }}}
+" FZF {{{
+command! -bang -nargs=? Tags
+  \ call fzf#vim#tags(<q-args>, fzf#vim#with_preview(), <bang>0)
+" "}}}
 " }}}
 
 let g:clipboard = {
