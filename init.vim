@@ -113,29 +113,18 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'skywind3000/asyncrun.vim'
 
 " Completing and snippets
-if !has('nvim')
-  Plug 'ervandew/supertab'
-else
-  Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
-  Plug 'ncm2/ncm2'
-  Plug 'roxma/nvim-yarp'
-  Plug 'ncm2/ncm2-tmux'
-  Plug 'ncm2/ncm2-path'
-  Plug 'ncm2/ncm2-bufword'
-  Plug 'ncm2/ncm2-jedi'
-  Plug 'ncm2/ncm2-ultisnips'
-  Plug 'ncm2/float-preview.nvim'
-endif
 Plug 'sirver/ultisnips'
 Plug 'honza/vim-snippets'
+if has('nvim')
+   Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+   Plug 'neoclide/coc-sources'
+endif
 
 
 " Vim file navigation
 " Plug 'tpope/vim-vinegar'
 Plug 'justinmk/vim-dirvish'
 Plug 'tpope/vim-projectionist'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
-Plug 'junegunn/fzf.vim'
 
 " Theme
 Plug 'NLKNguyen/papercolor-theme'
@@ -181,8 +170,8 @@ Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'NLKNguyen/c-syntax.vim', { 'for': 'c'  }
 
 " Python
-Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
+Plug 'vim-python/python-syntax', { 'for': 'python' }
 
 " Git
 Plug 'tpope/vim-git'
@@ -314,6 +303,8 @@ endif
 set autoindent " Automatically indent
 set cindent " Indent based on C syntax
 set cinwords+=foreach
+
+set updatetime=300
 
 if s:darwin
   set vb
@@ -1120,6 +1111,7 @@ augroup f_python
   au FileType python setlocal formatprg=autopep8\ -
   autocmd FileType python setlocal path-=**
 augroup END
+let g:python_highlight_all=1
 " }}}
 " }}}
 
@@ -1173,23 +1165,25 @@ command! -nargs=* -complete=file Ag Grepper -noprompt -tool ag -grepprg ag --vim
 autocmd FileType netrw setl bufhidden=delete
 " }}}
 " NCM {{{
-" Use <TAB> to select the popup menu:
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-autocmd BufEnter * call ncm2#enable_for_buffer()
-inoremap <expr> <CR> pumvisible() ? "\<C-y>\<CR>" : delimitMate#ExpandReturn()
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" Or use `complete_info` if your vim support it, like:
+" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+
 " }}}
 " Background make {{{
 nnoremap <F9> :PMake<CR>
-" }}}
-" Ultisnips {{{
-if has('nvim')
-  inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or(delimitMate#ExpandReturn(), 'n')
-  let g:UltiSnipsExpandTrigger        = "<C-j>"
-  let g:UltiSnipsJumpForwardTrigger   = "<C-j>"
-  let g:UltiSnipsJumpBackwardTrigger  = "<C-k>"
-endif
-" }}}
 " }}}
 " Indentguides {{{
 let g:indent_guides_enable_on_vim_startup = 1
@@ -1247,7 +1241,8 @@ let g:asyncrun_open = 8
 " FZF {{{
 command! -bang -nargs=? Tags
   \ call fzf#vim#tags(<q-args>, fzf#vim#with_preview(), <bang>0)
-" "}}}
+nnoremap <leader>p :Tags<CR>
+" }}}
 " }}}
 
 let g:clipboard = {
