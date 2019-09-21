@@ -58,7 +58,7 @@ Plug 'sgur/vim-editorconfig'
 
 " Brackets
 Plug 'tpope/vim-surround'
-Plug 'raimondi/delimitMate'
+" Plug 'raimondi/delimitMate'
 
 " Formatting
 Plug 'junegunn/vim-easy-align', { 'on' : [] }
@@ -84,13 +84,6 @@ Plug 'nathanaelkane/vim-indent-guides'
 " Command line
 Plug 'tpope/vim-eunuch', { 'on' : ['Remove', 'Unlink', 'Move', 'Rename', 'Mkdir', 'Chmod', 'Find', 'Locate', 'SudoEdit', 'SudoWrite']}
 
-if !has("nvim")
-  if s:darwin
-    Plug 'xolox/vim-misc'
-    Plug 'xolox/vim-easytags'
-  endif
-endif
-
 " Undoing
 Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
 
@@ -110,7 +103,8 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 " Plug 'roxma/vim-tmux-clipboard'
 
 " Background make
-Plug 'skywind3000/asyncrun.vim'
+" Plug 'skywind3000/asyncrun.vim'
+Plug 'tpope/vim-dispatch'
 
 " Completing and snippets
 Plug 'sirver/ultisnips'
@@ -151,10 +145,6 @@ if s:darwin
   " Markdown
   Plug 'tpope/vim-markdown', { 'for': 'markdown' }
 
-  " C
-  Plug 'osyo-manga/vim-reunions', { 'for': 'c' }
-  Plug 'osyo-manga/vim-marching', { 'for': 'c' }
-
   " Jade
   Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
 
@@ -164,7 +154,6 @@ endif
 
 " Coffeescript
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
-
 
 " C
 Plug 'NLKNguyen/c-syntax.vim', { 'for': 'c'  }
@@ -219,17 +208,17 @@ set title
 set scrolloff=4 " Stay 4 lines from top/bottom
 set showcmd
 
-" " Theme and style
-" " Override needs to be defined before calling colorscheme
-" function! IndentGuidesColor() abort
-"   highlight IndentGuidesOdd ctermbg=254
-"   highlight IndentGuidesEven ctermbg=254
-" endfunction
+" Theme and style
+" Override needs to be defined before calling colorscheme
+function! IndentGuidesColor() abort
+  highlight IndentGuidesOdd ctermbg=254
+  highlight IndentGuidesEven ctermbg=254
+endfunction
 
-" augroup IndentColors
-"   autocmd!
-"   autocmd ColorScheme * call IndentGuidesColor()
-" augroup END
+augroup IndentColors
+  autocmd!
+  autocmd ColorScheme * call IndentGuidesColor()
+augroup END
 
 " function! ColorOverrides() abort
 "   highlight Special ctermfg=31
