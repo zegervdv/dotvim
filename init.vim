@@ -424,15 +424,28 @@ set mouse=nic
 
 " }}}
 " Status line {{{
+hi StatusLine ctermfg=0 ctermbg=3 cterm=NONE
+hi StatusLineNC ctermfg=8 ctermbg=7 cterm=NONE
+hi User1 ctermfg=4 ctermbg=7
+hi User2 ctermfg=NONE ctermbg=NONE
+hi User3 ctermfg=0 ctermbg=3
+hi User4 ctermfg=0 ctermbg=5
 function! Status()
-  hi User1 guifg=#df875f guibg=NONE
-  let l:statusline = ''
-  let l:statusline .= '%n '
-  let l:statusline .= "%{expand('%:h')}/"
-  let l:statusline .= '%t'
-  let l:statusline .= '%m'
-  let l:statusline .= "\ [%{strlen(&ft)?&ft:'unknown'}]"
-  let l:statusline .= '%='
+  let l:statusline=''
+  let l:statusline.=' %t'
+  let l:statusline.=' %1*'
+  let l:statusline.=' %y'
+  let l:statusline.=' %2*'
+  let l:statusline.='%='
+  let l:statusline.=' %1*'
+  let l:statusline.=' line '
+  let l:statusline.=''
+  let l:statusline.='%l'
+  let l:statusline.=' %3*'
+  let l:statusline.=' of '
+  let l:statusline.=''
+  let l:statusline.='%L '
+  let l:statusline.=''
   return l:statusline
 endfunction
 set laststatus=2
@@ -1180,6 +1193,7 @@ inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " Or use `complete_info` if your vim support it, like:
 " inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " }}}
 " Background make {{{
