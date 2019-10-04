@@ -481,6 +481,10 @@ vnoremap / /\v
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
+" Search for beginning of command
+cnoremap <c-n>  <down>
+cnoremap <c-p>  <up>
+
 " Clear highlight
 nnoremap <silent><leader>l :noh<CR>
 
@@ -1040,7 +1044,8 @@ function! SetAutoAlign()
 endfunction
 
 function! VHDLChipScopeMacro()
-  let @c = "mtyiw'Sosignal \"_cs : std_logic;'Coattribute mark_debug of \"_cs : signal is \"true\";attribute dont_touch of \"_cs : signal is \"true\";'Do\"_cs <= \";=='t"
+  let @c = "mtyiw'Sosignal \"_cs : std_logic;'Coattribute mark_debug of \"_cs : signal is \"true\";
+attribute dont_touch of \"_cs : signal is \"true\";'Do\"_cs <= \";=='t"
 endfunction
 
 function! VHDLColonAlign()
