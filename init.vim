@@ -485,6 +485,14 @@ nnoremap N Nzzzv
 cnoremap <c-n>  <down>
 cnoremap <c-p>  <up>
 
+" Move whole lines
+nnoremap [e  :<c-u>execute 'move -1-'. v:count1<cr>
+nnoremap ]e  :<c-u>execute 'move +'. v:count1<cr>
+
+" Insert empty lines
+nnoremap [<space>  :<c-u>put! =repeat(nr2char(10), v:count1)<cr>'[
+nnoremap ]<space>  :<c-u>put =repeat(nr2char(10), v:count1)<cr>
+
 " Clear highlight
 nnoremap <silent><leader>l :noh<CR>
 
