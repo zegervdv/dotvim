@@ -338,6 +338,8 @@ set formatoptions+=2 " Use indent from 2nd line of a paragraph
 " set formatoptions+=l " Don't break lines that are already long
 set formatoptions+=1 " Break before 1-letter words
 
+set signcolumn=yes
+
 " Enable cursorline
 set cursorline
 augroup cline
@@ -1210,20 +1212,23 @@ let g:indent_guides_color_change_percent = 0
 
 " }}}
 " LanguageClient {{{
-let g:LanguageClient_serverCommands = {
-  \ 'dockerfile': ['docker-langserver', 'listen'],
-  \ 'python': ['pyls'],
-  \ 'vhdl': ['~/Public/vhdl_ls'],
-  \ 'cpp': ['clangd'],
-  \ 'c': ['clangd']
-  \ }
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
-let g:LanguageClient_autoStart = 1
-let g:LanguageClient_diagnosticsList = "Location"
-let g:LanguageClient_selectionUI = "quickfix"
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
 " }}}
 " Splice {{{
 let g:splice_initial_diff_grid=1
