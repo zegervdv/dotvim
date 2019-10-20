@@ -113,6 +113,7 @@ Plug 'honza/vim-snippets'
 if has('nvim')
    Plug 'neoclide/coc.nvim', { 'branch': 'release' }
    Plug 'neoclide/coc-sources'
+   Plug 'neovim/nvim-lsp'
 endif
 
 " Copying
@@ -972,7 +973,6 @@ endfunction
 xnoremap <silent> ai :<c-u>call <sid>aroundIndentation()<cr>
 onoremap <silent> ai :<c-u>call <sid>aroundIndentation()<cr>
 " }}}
-" }}}
 
 " Filetype specific settings {{{
 " Latex {{{
@@ -1223,8 +1223,6 @@ nmap <silent> gr <Plug>(coc-references)
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
@@ -1242,10 +1240,6 @@ let g:splice_initial_scrollbind_compare=1
 let g:splice_initial_scrollbind_path=1
 let g:splice_wrap="nowrap"
 " }}}
-" DelimitMate {{{
-let delimitMate_expand_cr=1
-let delimitMate_expand_space=1
-" }}}
 " Chipscoper {{{
 nnoremap <leader>cm :call ChipScoperMark()<CR>
 nnoremap <leader>ci :call ChipScoperInsert()<CR>
@@ -1258,14 +1252,6 @@ augroup END
 " }}}
 " GDB {{{
 let  g:nvimgdb_disable_start_keymaps = 1
-" }}}
-" AsyncRun {{{
-let g:asyncrun_open = 8
-" }}}
-" FZF {{{
-command! -bang -nargs=? Tags
-  \ call fzf#vim#tags(<q-args>, fzf#vim#with_preview(), <bang>0)
-nnoremap <leader>p :Tags<CR>
 " }}}
 " context {{{
 let g:context_enabled = 0
