@@ -130,7 +130,7 @@ Plug 'vim-scripts/tcl.vim--smithfield-indent', { 'for': 'tcl'}
 Plug 'w0rp/ale', { 'for': 'python' }
 
 " Debugging
-Plug 'sakhnik/nvim-gdb', { 'do': './install.sh' }
+Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
 
 if s:darwin
   " Ruby
@@ -425,7 +425,7 @@ function! Status()
   let l:statusline=''
   let l:statusline.=' %t'
   let l:statusline.=' %1*'
-  let l:statusline.=' %y'
+  let l:statusline.=' %Y'
   let l:statusline.=' %2*'
   let l:statusline.='%='
   let l:statusline.=' %1*'
@@ -1169,14 +1169,14 @@ let g:grepper = {
       \ 'tools': ['ag', 'hg'],
       \ 'highlight': 1,
       \ 'ag': { 
-      \  'grepprg': 'ag --path-to-agignore ~/.agignore --vimgrep',
+      \  'grepprg': 'rg --vimgrep',
       \ }}
 
 nnoremap gs <plug>(GrepperOperator)
 xnoremap gs <plug>(GrepperOperator)
 
 
-command! -nargs=* -complete=file Ag Grepper -noprompt -tool ag -grepprg ag --vimgrep <args>
+command! -nargs=* -complete=file Ag Grepper -noprompt -tool ag -grepprg rg --vimgrep <args>
 " }}}
 " Vinegar/NetRW {{{
 autocmd FileType netrw setl bufhidden=delete
