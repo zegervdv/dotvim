@@ -88,7 +88,7 @@ Plug 'tpope/vim-eunuch', { 'on' : ['Remove', 'Unlink', 'Move', 'Rename', 'Mkdir'
 Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
 
 " Pasting
-Plug 'junegunn/vim-peekaboo'
+" Plug 'junegunn/vim-peekaboo'
 
 " Tabs
 Plug 'gcmt/taboo.vim'
@@ -114,6 +114,8 @@ if has('nvim')
    Plug 'neoclide/coc-sources'
 endif
 
+" Copying
+Plug 'ShikChen/osc52.vim'
 
 " Vim file navigation
 " Plug 'tpope/vim-vinegar'
@@ -1265,11 +1267,14 @@ command! -bang -nargs=? Tags
 nnoremap <leader>p :Tags<CR>
 " }}}
 " }}}
+function SendOSCClipboard(lines, regtype)
+   call SendViaOSC52(join(a:lines, "\n"))
+endfunction
 
 let g:clipboard = {
       \   'name': 'TMUX',
       \   'copy': {
-      \      '+': 'tmux load-buffer -',
+      \      '+': function('SendOSCClipboard'),
       \      '*': 'tmux load-buffer -',
       \    },
       \   'paste': {
