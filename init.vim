@@ -77,6 +77,7 @@ augroup load_targets
   autocmd InsertEnter * call plug#load('targets.vim') | autocmd! load_targets
 augroup END
 Plug 'mhinz/vim-grepper', { 'on' : 'Grepper' }
+Plug 'wellle/context.vim'
 
 " Indentation
 Plug 'nathanaelkane/vim-indent-guides'
@@ -1266,7 +1267,11 @@ command! -bang -nargs=? Tags
   \ call fzf#vim#tags(<q-args>, fzf#vim#with_preview(), <bang>0)
 nnoremap <leader>p :Tags<CR>
 " }}}
+" context {{{
+let g:context_enabled = 0
 " }}}
+" }}}
+
 function SendOSCClipboard(lines, regtype)
    call SendViaOSC52(join(a:lines, "\n"))
 endfunction
