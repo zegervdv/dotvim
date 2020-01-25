@@ -59,6 +59,7 @@ Plug 'sgur/vim-editorconfig'
 " Brackets
 Plug 'tpope/vim-surround'
 " Plug 'raimondi/delimitMate'
+Plug 'tommcdo/vim-exchange'
 
 " Formatting
 Plug 'junegunn/vim-easy-align', { 'on' : [] }
@@ -1259,7 +1260,7 @@ let g:context_enabled = 0
 " }}}
 " }}}
 
-function SendOSCClipboard(lines, regtype)
+function! SendOSCClipboard(lines, regtype)
    call SendViaOSC52(join(a:lines, "\n"))
 endfunction
 
