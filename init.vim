@@ -973,6 +973,7 @@ endfunction
 xnoremap <silent> ai :<c-u>call <sid>aroundIndentation()<cr>
 onoremap <silent> ai :<c-u>call <sid>aroundIndentation()<cr>
 " }}}
+" }}}
 
 " Filetype specific settings {{{
 " Latex {{{
