@@ -58,7 +58,7 @@ Plug 'sgur/vim-editorconfig'
 
 " Brackets
 Plug 'tpope/vim-surround'
-" Plug 'raimondi/delimitMate'
+Plug 'raimondi/delimitMate'
 Plug 'tommcdo/vim-exchange'
 
 " Formatting
@@ -112,9 +112,11 @@ Plug 'tpope/vim-dispatch'
 Plug 'sirver/ultisnips'
 Plug 'honza/vim-snippets'
 if has('nvim')
-   Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-   Plug 'neoclide/coc-sources'
+   " Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+   " Plug 'neoclide/coc-sources'
    Plug 'neovim/nvim-lsp'
+   Plug 'haorenW1025/completion-nvim'
+   Plug 'haorenW1025/diagnostic-nvim'
 endif
 
 " Copying
@@ -127,12 +129,13 @@ Plug 'tpope/vim-projectionist'
 
 " Theme
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'joshdick/onedark.vim'
 
 "Tcl
 Plug 'vim-scripts/tcl.vim--smithfield-indent', { 'for': 'tcl'}
 
 " Python
-Plug 'w0rp/ale', { 'for': 'python' }
+Plug 'dense-analysis/ale', { 'for': 'python' }
 
 " Debugging
 Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
@@ -422,7 +425,7 @@ set mouse=nic
 " Status line {{{
 hi StatusLine ctermfg=0 ctermbg=3 cterm=NONE
 hi StatusLineNC ctermfg=8 ctermbg=7 cterm=NONE
-hi User1 ctermfg=4 ctermbg=7
+hi User1 ctermfg=0 ctermbg=7
 hi User2 ctermfg=NONE ctermbg=NONE
 hi User3 ctermfg=0 ctermbg=3
 hi User4 ctermfg=0 ctermbg=5
@@ -1133,6 +1136,16 @@ augroup f_python
   au FileType python setlocal formatprg=autopep8\ -
   autocmd FileType python setlocal path-=**
 augroup END
+lua << EOF
+  vim.lsp.set_log_level("debug")
+EOF
+lua << EOF
+require'nvim_lsp'.pyls.setup{
+    cmd = {"pyls"},
+    on_attach = require'on_attach'.on_attach
+}
+EOF
+
 let g:python_highlight_all=1
 " }}}
 " }}}
@@ -1192,29 +1205,34 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-" Or use `complete_info` if your vim support it, like:
-" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+" inoremap <silent><expr> <TAB>
+"       \ pumvisible() ? "\<C-n>" :
+"       \ <SID>check_back_space() ? "\<TAB>" :
+"       \ coc#refresh()
+" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" " Coc only does snippet and additional edit on confirm.
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" " Or use `complete_info` if your vim support it, like:
+" " inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+" autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+" Use <Tab> and <S-Tab> to navigate through popup menu
+" inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
+" Auto close popup menu when finish completion
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+inoremap <silent><expr> <TAB>
+  \ pumvisible() ? "\<C-n>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ completion#trigger_completion()
+
+let g:completion_enable_snippet = 'UltiSnips'
+"Fallback for https://github.com/Raimondi/delimitMate expanding on enter
+let g:completion_confirm_key_rhs = "\<Plug>delimitMateCR"
 " }}}
 " Background make {{{
 nnoremap <F9> :PMake<CR>
-" }}}
-" Indentguides {{{
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size = 1
-let g:indent_guides_auto_colors = 0
-let g:indent_guides_color_change_percent = 0
-
 " }}}
 " LanguageClient {{{
 nmap <silent> gd <Plug>(coc-definition)
@@ -1257,6 +1275,9 @@ let  g:nvimgdb_disable_start_keymaps = 1
 " }}}
 " context {{{
 let g:context_enabled = 0
+" }}}
+" ALE {{{
+let g:ale_virtualtext_cursor=1
 " }}}
 " }}}
 
